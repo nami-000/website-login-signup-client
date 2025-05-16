@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Management Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="client.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+          <div class="position-sticky">
+            <div class="sidebar-header">
+              <img src="/img/logo.png" alt="Logo" class="logo" />
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="#" data-section="dashboard">
+                  <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-section="profile">
+                  <i class="fas fa-user"></i> My Profile
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-section="appointments">
+                  <i class="fas fa-calendar"></i> Appointments
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-section="history">
+                  <i class="fas fa-history"></i> History
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-section="settings">
+                  <i class="fas fa-cog"></i> Settings
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <!-- Dashboard Section -->
+          <div class="section-content" id="dashboard-section">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+            >
+              <h1 class="h2">Welcome, <span id="dashboard-name">John Doe</span></h1>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="row mb-4">
+              <div class="col-md-3">
+                <div class="card stat-card">
+                  <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">
+                      Upcoming Appointments
+                    </h6>
+                    <h2 class="card-title" data-stat="appointments">0</h2>
+                    <p class="card-text">
+                      <small class="text-muted">Next: None scheduled</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card stat-card">
+                  <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">My Pets</h6>
+                    <h2 class="card-title" data-stat="pets">0</h2>
+                    <p class="card-text">
+                      <small class="text-muted">Registered pets</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card stat-card">
+                  <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Total Visits</h6>
+                    <h2 class="card-title" data-stat="visits">0</h2>
+                    <p class="card-text">
+                      <small class="text-muted">All-time visits</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card stat-card">
+                  <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Last Visit</h6>
+                    <h2 class="card-title" data-stat="last-visit">-</h2>
+                    <p class="card-text">
+                      <small class="text-muted">Most recent grooming</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="row mb-4">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Quick Actions</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-3 mb-3">
+                        <button type="button" class="btn btn-primary w-100" id="bookAppointmentBtn">
+                          <i class="fas fa-calendar-plus"></i> Book an Appointment
+                        </button>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#addPetModal">
+                          <i class="fas fa-paw"></i> Add New Pet
+                        </button>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <button class="btn btn-info w-100" id="viewAppointmentsBtn">
+                          <i class="fas fa-list"></i> View All Appointments
+                        </button>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <button class="btn btn-secondary w-100" id="updateProfileBtn">
+                          <i class="fas fa-user"></i> Update Profile
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Recent Appointments</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Pet</th>
+                            <th>Service</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody id="dashboard-recent-appointments">
+                          <!-- Content will be populated by JavaScript -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Profile Section -->
+          <div class="section-content" id="profile-section">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+            >
+              <h1 class="h2">My Profile</h1>
+              <div>
+                <button class="btn btn-danger" id="logoutBtn" title="Logout">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <div class="card">
+                  <div class="card-header text-center">
+                    <h5 class="card-title mb-0">Personal Information</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="profile-info text-center">
+                      <p>
+                        <strong>Name:</strong>
+                        <span id="profile-name">Loading...</span>
+                      </p>
+                      <p>
+                        <strong>Email:</strong>
+                        <span id="profile-email">Loading...</span>
+                      </p>
+                      <p>
+                        <strong>Phone:</strong>
+                        <span id="profile-phone">Loading...</span>
+                      </p>
+                      <p>
+                        <strong>Address:</strong>
+                        <span id="profile-address">Loading...</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center mt-4">
+              <div class="col-md-8">
+                <div class="card">
+                  <div
+                    class="card-header d-flex justify-content-between align-items-center"
+                  >
+                    <h5 class="card-title mb-0">My Pets</h5>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#addPetModal"
+                    >
+                      <i class="fas fa-plus"></i> Add Pet
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <div class="pets-list">
+                      <div id="pet-section" class="card mb-3"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <script>
+              console.log("hello world");
+
+              const profileNav = document.querySelector(
+                '[data-section="profile"]'
+              );
+              const petSection = document.querySelector("#pet-section");
+
+              profileNav.onclick = async function () {
+                const supabasePublicClient = await supabase.createClient(
+                  "https://zehjuqavoktgxjqwcqpo.supabase.co",
+                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+                  { db: { schema: "public" } }
+                );
+
+                const { count, error: countErr } = await supabasePublicClient
+                  .from("profile-pets")
+                  .select("*", { count: "exact" });
+
+                console.log(count);
+
+                const { data: pets, error } = await supabasePublicClient
+                  .from("profile-pets")
+                  .select("*");
+
+                for (let i = 0; i < pets.length; i++) {
+                  const section = document.createElement("div");
+
+                  section.innerHTML = `
+                    <div class="card-body p-3">
+                      <div id="pet-section" class="row align-items-center">
+                        <div class="col-md-9">
+                          <h5 class="mb-1">${pets[i].petName}</h5>
+                          <p class="mb-1 text-muted">
+                            ${pets[i].petBreed}
+                          </p>
+                          <div class="pet-details">
+                            <small class="text-muted">
+                              ${pets[i].notes ? 
+                                `Age: ${pets[i].notes.split(',')[1]?.trim() || 'Not specified'}, 
+                                Sex: ${pets[i].notes.split(',')[0]?.split(':')[1]?.trim() || 'Not specified'}
+                                ${pets[i].notes.includes('Notes:') ? 
+                                  `<br>Notes: ${pets[i].notes.split('Notes:')[1]?.trim()}` : 
+                                  ''}` : 
+                                'No additional information'}
+                            </small>
+                          </div>
+                        </div>
+                        <div class="col-md-3 text-end">
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-primary me-2 edit-pet-btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editPetModal"
+                            title="Edit Pet"
+                            data-pet-id="${pets[i].id}"
+                            data-pet-name="${pets[i].petName}"
+                            data-pet-species="${pets[i].petSpecies}"
+                            data-pet-breed="${pets[i].petBreed}"
+                            data-pet-notes="${pets[i].notes || ''}"
+                          >
+                            <i class="fas fa-edit"></i>
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-danger delete-pet-btn"
+                            title="Delete Pet"
+                            data-pet-id="${pets[i].id}"
+                          >
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  `;
+
+                  petSection.appendChild(section);
+                }
+
+                // Add event listeners to delete buttons after they are created
+                const deleteButtons =
+                  document.querySelectorAll(".delete-pet-btn");
+                deleteButtons.forEach((button) => {
+                  button.addEventListener("click", async function () {
+                    const petId = this.getAttribute("data-pet-id");
+                    const petName =
+                      this.closest(".card-body").querySelector(
+                        "h5"
+                      ).textContent;
+
+                    if (
+                      confirm(`Are you sure you want to delete ${petName}?`)
+                    ) {
+                      try {
+                        const { error } = await supabasePublicClient
+                          .from("profile-pets")
+                          .update({ status: 'Deleted' })
+                          .eq("id", petId);
+
+                        if (error) {
+                          alert("Error deleting pet: " + error.message);
+                        } else {
+                          // Remove the pet card from the DOM
+                          this.closest(".card-body").parentElement.remove();
+                          alert(`${petName} was deleted successfully!`);
+                        }
+                      } catch (err) {
+                        console.error("Error deleting pet:", err);
+                        alert("An error occurred while deleting the pet.");
+                      }
+                    }
+                  });
+                });
+
+                // Add event listeners to edit buttons
+                const editButtons = document.querySelectorAll(".edit-pet-btn");
+                editButtons.forEach((button) => {
+                  button.addEventListener("click", function () {
+                    // Get pet data from button attributes
+                    const petId = this.getAttribute("data-pet-id");
+                    const petName = this.getAttribute("data-pet-name");
+                    const petSpecies = this.getAttribute("data-pet-species");
+                    const petBreed = this.getAttribute("data-pet-breed");
+                    const petSex = this.getAttribute("data-pet-sex");
+                    const petAge = this.getAttribute("data-pet-age");
+                    const petNotes = this.getAttribute("data-pet-notes");
+
+                    // Set values in edit form
+                    document.querySelector(
+                      '#editPetForm input[name="petName"]'
+                    ).value = petName;
+
+                    // Find and select the correct option in the species dropdown
+                    const speciesSelect = document.querySelector(
+                      '#editPetForm select[name="petSpecies"]'
+                    );
+                    for (let i = 0; i < speciesSelect.options.length; i++) {
+                      if (speciesSelect.options[i].value === petSpecies) {
+                        speciesSelect.selectedIndex = i;
+                        break;
+                      }
+                    }
+
+                    document.querySelector(
+                      '#editPetForm input[name="petBreed"]'
+                    ).value = petBreed;
+
+                    document.querySelector(
+                      '#editPetForm input[name="petSex"]'
+                    ).value = petSex;
+
+                    document.querySelector(
+                      '#editPetForm input[name="petAge"]'
+                    ).value = petAge;
+
+                    document.querySelector(
+                      '#editPetForm textarea[name="petNotes"]'
+                    ).value = petNotes;
+
+                    // Store the pet ID in a data attribute on the form for later use
+                    document
+                      .getElementById("editPetForm")
+                      .setAttribute("data-pet-id", petId);
+                  });
+                });
+              };
+            </script>
+          </div>
+
+          <!-- Appointments Section -->
+          <div class="section-content hidden" id="appointments-section">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+            >
+              <h1 class="h2">My Appointments</h1>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#scheduleAppointmentModal"
+              >
+                <i class="fas fa-plus"></i> Schedule New Appointment
+              </button>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Upcoming Appointments</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="list-group upcoming-appointments-list">
+                      <!-- Content will be populated by JavaScript -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Available Services</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="list-group">
+                      <div class="list-group-item">
+                        <h6 class="mb-1">Full & Basic Grooming</h6>
+                        <p class="mb-1">
+                          Includes bath, brush, nail trim, and ear cleaning.
+                          <br />₱1,500
+                        </p>
+                      </div>
+                      <div class="list-group-item">
+                        <h6 class="mb-1">Bath & Blowdry</h6>
+                        <p class="mb-1">
+                          Complete bath with blowdry and coat conditioning.
+                          <br />₱800
+                        </p>
+                      </div>
+                      <div class="list-group-item">
+                        <h6 class="mb-1">Haircut</h6>
+                        <p class="mb-1">
+                          Professional haircut and styling for your pet.
+                          <br />₱1,200
+                        </p>
+                      </div>
+                      <div class="list-group-item">
+                        <h6 class="mb-1">Nail Trim</h6>
+                        <p class="mb-1">
+                          Safe and precise nail trimming service. <br />₱300
+                        </p>
+                      </div>
+                      <div class="list-group-item">
+                        <h6 class="mb-1">Ear Cleaning</h6>
+                        <p class="mb-1">
+                          Gentle ear cleaning to prevent infections. <br />₱400
+                        </p>
+                      </div>
+                      <div class="list-group-item">
+                        <h6 class="mb-1">Teeth Brushing</h6>
+                        <p class="mb-1">
+                          Thorough teeth cleaning for better oral health.
+                          <br />₱500
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- History Section -->
+          <div class="section-content hidden" id="history-section">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+            >
+              <h1 class="h2">Appointment History</h1>
+            </div>
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Recent Appointments</h5>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Pet</th>
+                        <th>Service</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="recent-appointments-body">
+                      <!-- Content will be populated by JavaScript -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Completed Appointments</h5>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Pet</th>
+                        <th>Service</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="completed-appointments-body">
+                      <!-- Content will be populated by JavaScript -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Settings Section -->
+          <div class="section-content" id="settings-section">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+            >
+              <h1 class="h2">Account Settings</h1>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Profile Settings</h5>
+                  </div>
+                  <div class="card-body">
+                    <form id="profileForm">
+                      <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" name="fullName" required placeholder="Enter your full name" title="Full Name" />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" required placeholder="Enter your email" title="Email" />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" name="phone" required placeholder="Enter your phone number" title="Phone Number" />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" name="address" rows="2" placeholder="Enter your address" title="Address"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Security Settings</h5>
+                  </div>
+                  <div class="card-body">
+                    <form id="securityForm">
+                      <div class="mb-3">
+                        <label class="form-label">Current Password</label>
+                        <input type="password" class="form-control" name="currentPassword" placeholder="Enter current password" />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">New Password</label>
+                        <input type="password" class="form-control" name="newPassword" placeholder="Enter new password" />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm new password" />
+                      </div>
+                      <button type="submit" class="btn btn-primary w-100">Update Password</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Profile</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              title="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="profileForm">
+              <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="fullName"
+                  value="John Doe"
+                  required
+                  placeholder="Enter your full name"
+                  title="Full Name"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  value="john.doe@email.com"
+                  required
+                  placeholder="Enter your email"
+                  title="Email"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  name="phone"
+                  value="(555) 123-4567"
+                  required
+                  placeholder="Enter your phone number"
+                  title="Phone Number"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Address</label>
+                <textarea
+                  class="form-control"
+                  name="address"
+                  rows="2"
+                  placeholder="Enter your address"
+                  title="Address"
+                >
+123 Main St, City</textarea
+                >
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" id="saveProfile">
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule Appointment Modal -->
+    <div class="modal fade" id="scheduleAppointmentModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Schedule New Appointment</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="appointmentForm">
+              <div class="mb-3">
+                <label class="form-label">Pet Name</label>
+                <select class="form-select" name="petName" required title="Pet Name">
+                  <option value="">Select your pet</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Service Type</label>
+                <div class="service-options">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="serviceType" value="Full & Basic Grooming" data-price="1500" id="service1">
+                    <label class="form-check-label" for="service1">
+                      Full & Basic Grooming - ₱1,500
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="serviceType" value="Bath & Blowdry" data-price="800" id="service2">
+                    <label class="form-check-label" for="service2">
+                      Bath & Blowdry - ₱800
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="serviceType" value="Haircut" data-price="1200" id="service3">
+                    <label class="form-check-label" for="service3">
+                      Haircut - ₱1,200
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="serviceType" value="Nail Trim" data-price="300" id="service4">
+                    <label class="form-check-label" for="service4">
+                      Nail Trim - ₱300
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="serviceType" value="Ear Cleaning" data-price="400" id="service5">
+                    <label class="form-check-label" for="service5">
+                      Ear Cleaning - ₱400
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="serviceType" value="Teeth Brushing" data-price="500" id="service6">
+                    <label class="form-check-label" for="service6">
+                      Teeth Brushing - ₱500
+                    </label>
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <strong>Total Price: ₱<span id="totalPrice">0.00</span></strong>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Preferred Staff</label>
+                <select class="form-select" name="preferredStaff" title="Preferred Staff">
+                  <option value="">Select staff member (Optional)</option>
+                  <option value="staff1">John Smith - Senior Groomer</option>
+                  <option value="staff2">Sarah Johnson - Pet Stylist</option>
+                  <option value="staff3">Mike Wilson - Grooming Specialist</option>
+                  <option value="staff4">Emily Brown - Pet Care Expert</option>
+                </select>
+                <small class="form-text text-muted">You can leave this blank if you don't have a preferred staff member.</small>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Preferred Date</label>
+                <input type="date" class="form-control" name="appointmentDate" required title="Preferred Date" min="">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Preferred Time</label>
+                <select class="form-select" name="appointmentTime" required title="Preferred Time">
+                  <option value="">Select time</option>
+                  <option value="09:00">9:00 AM</option>
+                  <option value="10:00">10:00 AM</option>
+                  <option value="11:00">11:00 AM</option>
+                  <option value="13:00">1:00 PM</option>
+                  <option value="14:00">2:00 PM</option>
+                  <option value="15:00">3:00 PM</option>
+                  <option value="16:00">4:00 PM</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Special Requests (Optional)</label>
+                <textarea class="form-control" name="specialRequests" rows="2" title="Special Requests" placeholder="Add any special instructions or requests for your pet's service (optional)"></textarea>
+                <small class="form-text text-muted">You can leave this blank if you don't have any special requests.</small>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="scheduleAppointment">Schedule</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Pet Modal -->
+    <div class="modal fade" id="addPetModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add New Pet</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              title="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="petForm">
+              <div class="mb-3">
+                <label class="form-label">Pet Name</label>
+                <input
+                  id="pet-name"
+                  type="text"
+                  class="form-control"
+                  name="petName"
+                  required
+                  title="Pet Name"
+                  placeholder="Enter your pet's name"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Species</label>
+                <select
+                  id="pet-species"
+                  class="form-select"
+                  name="petSpecies"
+                  required
+                  title="Pet Species"
+                >
+                  <option value="">Select species</option>
+                  <option value="dog">Dog</option>
+                  <option value="cat">Cat</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Breed</label>
+                <input
+                  id="pet-breed"
+                  type="text"
+                  class="form-control"
+                  name="petBreed"
+                  required
+                  title="Pet Breed"
+                  placeholder="Enter your pet's breed"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Sex</label>
+                <select
+                  id="pet-sex"
+                  class="form-select"
+                  name="petSex"
+                  required
+                  title="Pet Sex"
+                >
+                  <option value="">Select sex</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Age</label>
+                <div class="input-group">
+                  <input
+                    id="pet-age"
+                    type="number"
+                    class="form-control"
+                    name="petAge"
+                    required
+                    min="0"
+                    max="30"
+                    title="Pet Age"
+                    placeholder="Enter your pet's age"
+                  />
+                  <span class="input-group-text">years</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Notes (Allergies, Special Care, etc.)</label>
+                <textarea
+                  id="pet-notes"
+                  class="form-control"
+                  name="petNotes"
+                  rows="3"
+                  title="Pet Notes"
+                  placeholder="Enter any important notes about your pet (allergies, special care requirements, etc.)"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" id="savePet">
+              Add Pet
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Pet Modal -->
+    <div class="modal fade" id="editPetModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Pet Information</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              title="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="editPetForm">
+              <div class="mb-3">
+                <label class="form-label">Pet Name</label>
+                <input
+                  id="edit-pet-name"
+                  type="text"
+                  class="form-control"
+                  name="petName"
+                  required
+                  title="Pet Name"
+                  placeholder="Enter your pet's name"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Species</label>
+                <select
+                  id="edit-pet-species"
+                  class="form-select"
+                  name="petSpecies"
+                  required
+                  title="Pet Species"
+                >
+                  <option value="dog">Dog</option>
+                  <option value="cat">Cat</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Breed</label>
+                <input
+                  id="edit-pet-breed"
+                  type="text"
+                  class="form-control"
+                  name="petBreed"
+                  required
+                  title="Pet Breed"
+                  placeholder="Enter your pet's breed"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Sex</label>
+                <select
+                  id="edit-pet-sex"
+                  class="form-select"
+                  name="petSex"
+                  required
+                  title="Pet Sex"
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Age</label>
+                <div class="input-group">
+                  <input
+                    id="edit-pet-age"
+                    type="number"
+                    class="form-control"
+                    name="petAge"
+                    required
+                    min="0"
+                    max="30"
+                    title="Pet Age"
+                    placeholder="Enter your pet's age"
+                  />
+                  <span class="input-group-text">years</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Notes (Allergies, Special Care, etc.)</label>
+                <textarea
+                  id="edit-pet-notes"
+                  class="form-control"
+                  name="petNotes"
+                  rows="3"
+                  title="Pet Notes"
+                  placeholder="Enter any important notes about your pet (allergies, special care requirements, etc.)"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" id="updatePet">
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .status-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+      .progress {
+        background-color: #e9ecef;
+      }
+      .btn-avatar {
+        background-color: #6c757d;
+        border-color: #6c757d;
+      }
+      .btn-avatar:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
+    <script src="client.js"></script>
+    <script>
+      // Handle sidebar navigation
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get all navigation links
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        // Add click event listener to each link
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Remove active class from all links
+            navLinks.forEach((l) => l.classList.remove("active"));
+
+            // Add active class to clicked link
+            this.classList.add("active");
+
+            // Get the target section
+            const targetSection = this.getAttribute("data-section");
+
+            // Hide all sections
+            document.querySelectorAll(".section-content").forEach((section) => {
+              section.style.display = "none";
+            });
+
+            // Show the target section
+            document.getElementById(`${targetSection}-section`).style.display =
+              "block";
+          });
+        });
+
+        // Handle logout button click
+        const logoutBtn = document.getElementById("logoutBtn");
+        logoutBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (confirm("Are you sure you want to logout?")) {
+            // Redirect to login page
+            window.location.href = "login.html";
+          }
+        });
+
+        // Load pets into the appointment form when the modal opens
+        document.getElementById('scheduleAppointmentModal').addEventListener('show.bs.modal', async function () {
+          console.log("Loading pets for appointment form...");
+          const petSelect = document.querySelector('#appointmentForm select[name="petName"]');
+          const dateInput = document.querySelector('#appointmentForm input[name="appointmentDate"]');
+          
+          // Set minimum date to today
+          const today = new Date().toISOString().split('T')[0];
+          dateInput.min = today;
+
+          try {
+            const supabasePublicClient = supabase.createClient(
+              "https://zehjuqavoktgxjqwcqpo.supabase.co",
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+              { db: { schema: "public" } }
+            );
+
+            // Fetch pets from Supabase
+            const { data: pets, error } = await supabasePublicClient
+              .from("profile-pets")
+              .select("*");
+
+            console.log("Fetched pets:", pets);
+
+            if (error) {
+              console.error("Error fetching pets:", error);
+              throw error;
+            }
+
+            // Clear existing options
+            petSelect.innerHTML = '<option value="">Select your pet</option>';
+
+            // Add pets to select
+            pets.forEach(pet => {
+              const option = document.createElement('option');
+              option.value = pet.petName;
+              option.textContent = `${pet.petName} (${pet.petSpecies})`;
+              petSelect.appendChild(option);
+            });
+          } catch (error) {
+            console.error("Error loading pets:", error);
+            alert("Error loading pets. Please try again.");
+          }
+        });
+
+        // Add this before the scheduleButton event listener
+        // Calculate total price when services are selected
+        const serviceCheckboxes = document.querySelectorAll('input[name="serviceType"]');
+        const totalPriceSpan = document.getElementById('totalPrice');
+        const scheduleButton = document.getElementById("scheduleAppointment");
+        const appointmentForm = document.getElementById("appointmentForm");
+
+        serviceCheckboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', function() {
+            let total = 0;
+            serviceCheckboxes.forEach(cb => {
+              if (cb.checked) {
+                total += parseFloat(cb.dataset.price);
+              }
+            });
+            totalPriceSpan.textContent = total.toFixed(2);
+          });
+        });
+
+        if (scheduleButton) {
+          scheduleButton.addEventListener("click", async function () {
+            console.log("Scheduling appointment...");
+            const formData = new FormData(appointmentForm);
+            const petName = formData.get("petName");
+            const selectedServices = Array.from(formData.getAll("serviceType"));
+            const appointmentDate = formData.get("appointmentDate");
+            const appointmentTime = formData.get("appointmentTime");
+            const specialRequests = formData.get("specialRequests") || "";
+
+            console.log("Form data:", {
+              petName,
+              selectedServices,
+              appointmentDate,
+              appointmentTime,
+              specialRequests
+            });
+
+            // Validate required fields
+            if (!petName || selectedServices.length === 0 || !appointmentDate || !appointmentTime) {
+              alert("Please fill in all required fields (Pet Name, at least one Service, Date, and Time)");
+              return;
+            }
+
+            try {
+              const supabasePublicClient = supabase.createClient(
+                "https://zehjuqavoktgxjqwcqpo.supabase.co",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+                { db: { schema: "public" } }
+              );
+
+              // Calculate total price
+              const servicePrices = {
+                "Full & Basic Grooming": 1500,
+                "Bath & Blowdry": 800,
+                "Haircut": 1200,
+                "Nail Trim": 300,
+                "Ear Cleaning": 400,
+                "Teeth Brushing": 500
+              };
+              const totalPrice = selectedServices.reduce((sum, service) => sum + servicePrices[service], 0);
+
+              console.log("Creating appointment with data:", {
+                petName,
+                serviceType: selectedServices.join(", "),
+                appointmentDate,
+                appointmentTime,
+                specialRequests,
+                status: "Pending",
+                price: totalPrice
+              });
+
+              // Insert appointment into Supabase
+              const { data, error } = await supabasePublicClient
+                .from("appointments")
+                .insert({
+                  petName,
+                  serviceType: selectedServices.join(", "),
+                  appointmentDate,
+                  appointmentTime,
+                  specialRequests,
+                  status: "Pending",
+                  price: totalPrice
+                })
+                .select();
+
+              if (error) {
+                console.error("Error inserting appointment:", error);
+                throw error;
+              }
+
+              console.log("Appointment created successfully:", data);
+
+              // Close modal and reset form
+              const modal = bootstrap.Modal.getInstance(document.getElementById("scheduleAppointmentModal"));
+              modal.hide();
+              appointmentForm.reset();
+              document.getElementById('totalPrice').textContent = "0.00";
+
+              // Show success message
+              alert("Appointment scheduled successfully!");
+
+              // Reload appointments to show the new one
+              await loadAppointments();
+
+            } catch (error) {
+              console.error("Error scheduling appointment:", error);
+              alert("Error scheduling appointment: " + (error.message || "Please try again."));
+            }
+          });
+        } else {
+          console.error("Schedule button not found!");
+        }
+
+        // Load existing appointments when page loads
+        document.addEventListener("DOMContentLoaded", async function() {
+          const supabasePublicClient = supabase.createClient(
+            "https://zehjuqavoktgxjqwcqpo.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+            { db: { schema: "public" } }
+          );
+
+          try {
+            // Fetch appointments from Supabase
+            const { data: appointments, error } = await supabasePublicClient
+              .from("appointments")
+              .select("*")
+              .order("appointmentDate", { ascending: false });
+
+            if (error) {
+              throw error;
+            }
+
+            // Update appointment count
+            const appointmentCount = document.querySelector('[data-stat="appointments"]');
+            appointmentCount.textContent = appointments.length;
+
+            // Populate upcoming appointments in dashboard
+            const upcomingAppointments = document.querySelector(".upcoming-appointments-list");
+            const recentAppointmentsBody = document.getElementById("recent-appointments-body");
+            const completedAppointmentsBody = document.getElementById("completed-appointments-body");
+            const dashboardRecentAppointments = document.getElementById("dashboard-recent-appointments");
+
+            appointments.forEach(appointment => {
+              // Add to upcoming appointments
+              const appointmentCard = document.createElement("div");
+              appointmentCard.className = "list-group-item";
+              appointmentCard.innerHTML = `
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1">${appointment.serviceType}</h6>
+                  <small>${new Date(appointment.appointmentDate).toLocaleDateString()} at ${appointment.appointmentTime}</small>
+                </div>
+                <p class="mb-1">Pet: ${appointment.petName} (${appointment.petType})</p>
+                <p class="mb-1">${appointment.specialRequests || "No special requests"}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted">Status: ${appointment.status}</small>
+                  <small class="text-muted">Price: ₱${servicePrices[appointment.serviceType]?.toFixed(2) || '0.00'}</small>
+                  <button class="btn btn-sm btn-danger delete-appointment" data-appointment-id="${appointment.id}">
+                    <i class="fas fa-trash"></i> Cancel
+                  </button>
+                </div>
+              `;
+              upcomingAppointments.appendChild(appointmentCard);
+
+              // Add to history table
+              const historyRow = document.createElement("tr");
+              historyRow.innerHTML = `
+                <td>${appointment.appointmentDate}</td>
+                <td>${appointment.appointmentTime}</td>
+                <td>${appointment.petName}</td>
+                <td>${appointment.serviceType}</td>
+                <td>₱${servicePrices[appointment.serviceType]?.toFixed(2) || '0.00'}</td>
+                <td><span class="badge bg-warning">${appointment.status}</span></td>
+              `;
+              recentAppointmentsBody.appendChild(historyRow);
+            });
+          } catch (error) {
+            console.error("Error loading appointments:", error);
+            alert("Error loading appointments. Please refresh the page.");
+          }
+        });
+
+        // Add Pet functionality
+        const btnAddPet = document.querySelector("#savePet");
+        if (btnAddPet) {
+          btnAddPet.addEventListener("click", async function () {
+            const petName = document.querySelector("#pet-name");
+            const petSpecies = document.querySelector("#pet-species");
+            const petBreed = document.querySelector("#pet-breed");
+            const petSex = document.querySelector("#pet-sex");
+            const petAge = document.querySelector("#pet-age");
+            const petNotes = document.querySelector("#pet-notes");
+
+            if (!petName.value || !petSpecies.value || !petBreed.value || !petSex.value || !petAge.value) {
+              alert("Please fill in all required fields");
+              return;
+            }
+
+            try {
+              const supabasePublicClient = supabase.createClient(
+                "https://zehjuqavoktgxjqwcqpo.supabase.co",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+                { db: { schema: "public" } }
+              );
+
+              // Add the pet with only the existing columns
+              const { data, error } = await supabasePublicClient
+                .from("profile-pets")
+                .insert({
+                  petName: petName.value,
+                  petSpecies: petSpecies.value,
+                  petBreed: petBreed.value,
+                  // Store additional information in the notes field temporarily
+                  notes: `Sex: ${petSex.value}, Age: ${petAge.value} years${petNotes.value ? `, Notes: ${petNotes.value}` : ''}`
+                })
+                .select();
+
+              if (error) {
+                throw error;
+              }
+
+              // Close modal
+              const modal = bootstrap.Modal.getInstance(document.getElementById("addPetModal"));
+              modal.hide();
+
+              // Reset form
+              document.getElementById("petForm").reset();
+
+              // Show success message
+              alert("Pet added successfully!");
+
+              // Reload the page to show the new pet
+              window.location.reload();
+            } catch (err) {
+              console.error("Error adding pet:", err);
+              alert("Error adding pet: " + (err.message || "Please try again."));
+            }
+          });
+        }
+      });
+
+      // Function to load appointments
+      async function loadAppointments() {
+        console.log("Loading appointments...");
+        const appointmentsList = document.querySelector('.upcoming-appointments-list');
+        const recentAppointmentsBody = document.getElementById('recent-appointments-body');
+        const completedAppointmentsBody = document.getElementById('completed-appointments-body');
+        const dashboardRecentAppointments = document.getElementById('dashboard-recent-appointments');
+        
+        // Service prices mapping
+        const servicePrices = {
+          "Full & Basic Grooming": 1500.00,
+          "Bath & Blowdry": 800.00,
+          "Haircut": 1200.00,
+          "Nail Trim": 300.00,
+          "Ear Cleaning": 400.00,
+          "Teeth Brushing": 500.00
+        };
+        
+        try {
+          const supabasePublicClient = supabase.createClient(
+            "https://zehjuqavoktgxjqwcqpo.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+            { db: { schema: "public" } }
+          );
+
+          // Fetch appointments from Supabase
+          const { data: appointments, error } = await supabasePublicClient
+            .from("appointments")
+            .select("*")
+            .order('appointmentDate', { ascending: true });
+
+          if (error) {
+            console.error("Error fetching appointments:", error);
+            throw error;
+          }
+
+          console.log("All appointments:", appointments);
+
+          // Filter appointments
+          const today = new Date();
+          const upcomingAppointments = appointments.filter(apt => {
+            const isUpcoming = new Date(apt.appointmentDate) >= today;
+            const isNotCancelled = apt.status !== 'Cancelled';
+            const isNotCompleted = apt.status !== 'Completed';
+            console.log(`Appointment ${apt.id}:`, {
+              date: apt.appointmentDate,
+              status: apt.status,
+              isUpcoming,
+              isNotCancelled,
+              isNotCompleted,
+              included: isUpcoming && isNotCancelled && isNotCompleted
+            });
+            return isUpcoming && isNotCancelled && isNotCompleted;
+          });
+
+          console.log("Filtered upcoming appointments:", upcomingAppointments);
+          
+          const recentAppointments = appointments.filter(apt => 
+            apt.status !== 'Completed' && apt.status !== 'Cancelled'
+          );
+          
+          const completedAppointments = appointments.filter(apt => 
+            apt.status === 'Completed'
+          );
+
+          // Clear existing content
+          if (appointmentsList) appointmentsList.innerHTML = '';
+          if (recentAppointmentsBody) recentAppointmentsBody.innerHTML = '';
+          if (completedAppointmentsBody) completedAppointmentsBody.innerHTML = '';
+          if (dashboardRecentAppointments) dashboardRecentAppointments.innerHTML = '';
+
+          if (!appointments || appointments.length === 0) {
+            if (appointmentsList) appointmentsList.innerHTML = '<div class="list-group-item">No appointments scheduled</div>';
+            if (recentAppointmentsBody) recentAppointmentsBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No recent appointments</td></tr>';
+            if (completedAppointmentsBody) completedAppointmentsBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No completed appointments</td></tr>';
+            if (dashboardRecentAppointments) dashboardRecentAppointments.innerHTML = '<tr><td colspan="6" style="text-align: center;">No recent appointments</td></tr>';
+            return;
+          }
+
+          // Update appointment count in dashboard
+          const appointmentCount = document.querySelector('[data-stat="appointments"]');
+          if (appointmentCount) {
+            console.log("Setting appointment count to:", upcomingAppointments.length);
+            appointmentCount.textContent = upcomingAppointments.length;
+          }
+
+          // Display upcoming appointments
+          if (appointmentsList) {
+            appointmentsList.innerHTML = upcomingAppointments.map(appointment => {
+              const services = appointment.serviceType.split(', ');
+              const totalPrice = services.reduce((sum, service) => sum + (servicePrices[service] || 0), 0);
+
+              return `
+                <div class="list-group-item">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1">${appointment.serviceType}</h6>
+                    <small>${new Date(appointment.appointmentDate).toLocaleDateString()} at ${appointment.appointmentTime}</small>
+                  </div>
+                  <p class="mb-1">Pet: ${appointment.petName}</p>
+                  <p class="mb-1">${appointment.specialRequests || 'No special requests'}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">Status: ${appointment.status}</small>
+                    <small class="text-muted">Total Price: ₱${totalPrice.toFixed(2)}</small>
+                    <button class="btn btn-sm btn-danger delete-appointment" data-appointment-id="${appointment.id}">
+                      <i class="fas fa-trash"></i> Cancel
+                    </button>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
+
+          // Display recent appointments
+          if (recentAppointmentsBody) {
+            recentAppointmentsBody.innerHTML = recentAppointments.map(appointment => {
+              const services = appointment.serviceType.split(', ');
+              const totalPrice = services.reduce((sum, service) => sum + (servicePrices[service] || 0), 0);
+
+              return `
+                <tr>
+                  <td>${new Date(appointment.appointmentDate).toLocaleDateString()}</td>
+                  <td>${appointment.appointmentTime}</td>
+                  <td>${appointment.petName}</td>
+                  <td>${appointment.serviceType}</td>
+                  <td>₱${totalPrice.toFixed(2)}</td>
+                  <td><span class="badge bg-warning">${appointment.status}</span></td>
+                </tr>
+              `;
+            }).join('');
+          }
+
+          // Display completed appointments
+          if (completedAppointmentsBody) {
+            completedAppointmentsBody.innerHTML = completedAppointments.map(appointment => {
+              const services = appointment.serviceType.split(', ');
+              const totalPrice = services.reduce((sum, service) => sum + (servicePrices[service] || 0), 0);
+
+              return `
+                <tr>
+                  <td>${new Date(appointment.appointmentDate).toLocaleDateString()}</td>
+                  <td>${appointment.appointmentTime}</td>
+                  <td>${appointment.petName}</td>
+                  <td>${appointment.serviceType}</td>
+                  <td>₱${totalPrice.toFixed(2)}</td>
+                  <td><span class="badge bg-success">Completed</span></td>
+                </tr>
+              `;
+            }).join('');
+          }
+
+          // Display recent appointments in dashboard
+          if (dashboardRecentAppointments) {
+            dashboardRecentAppointments.innerHTML = recentAppointments.slice(0, 5).map(appointment => {
+              const services = appointment.serviceType.split(', ');
+              const totalPrice = services.reduce((sum, service) => sum + (servicePrices[service] || 0), 0);
+
+              return `
+                <tr>
+                  <td>${new Date(appointment.appointmentDate).toLocaleDateString()}</td>
+                  <td>${appointment.appointmentTime}</td>
+                  <td>${appointment.petName}</td>
+                  <td>${appointment.serviceType}</td>
+                  <td>₱${totalPrice.toFixed(2)}</td>
+                  <td><span class="badge bg-warning">${appointment.status}</span></td>
+                </tr>
+              `;
+            }).join('');
+          }
+
+        } catch (error) {
+          console.error("Error loading appointments:", error);
+          if (appointmentsList) appointmentsList.innerHTML = '<div class="list-group-item text-danger">Error loading appointments. Please try again.</div>';
+          if (recentAppointmentsBody) recentAppointmentsBody.innerHTML = '<tr><td colspan="6" class="text-danger">Error loading recent appointments. Please try again.</td></tr>';
+          if (completedAppointmentsBody) completedAppointmentsBody.innerHTML = '<tr><td colspan="6" class="text-danger">Error loading completed appointments. Please try again.</td></tr>';
+          if (dashboardRecentAppointments) dashboardRecentAppointments.innerHTML = '<tr><td colspan="6" class="text-danger">Error loading recent appointments. Please try again.</td></tr>';
+        }
+      }
+
+      // Load appointments when the page loads
+      document.addEventListener("DOMContentLoaded", async function() {
+        await loadAppointments();
+      });
+
+      // Add event listener for appointments navigation
+      document.querySelector('[data-section="appointments"]').addEventListener('click', async function() {
+        await loadAppointments();
+      });
+
+      // Load user settings when the page loads
+      document.addEventListener("DOMContentLoaded", async function() {
+        console.log("Page loaded, loading user settings...");
+        await loadUserSettings();
+      });
+
+      // Function to load user settings
+      async function loadUserSettings() {
+        console.log("Loading user settings...");
+        const supabasePublicClient = supabase.createClient(
+          "https://zehjuqavoktgxjqwcqpo.supabase.co",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+          { db: { schema: "public" } }
+        );
+
+        try {
+          // Clear the form fields
+          const profileForm = document.getElementById("profileForm");
+          profileForm.reset();
+        } catch (error) {
+          console.error("Error clearing form:", error);
+        }
+      }
+
+      // Handle profile form submission
+      document.getElementById("profileForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        console.log("Saving profile settings...");
+        
+        const formData = new FormData(this);
+        const settings = {
+          fullName: formData.get("fullName"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          address: formData.get("address"),
+          updated_at: new Date().toISOString()
+        };
+
+        console.log("Settings to save:", settings);
+
+        const supabasePublicClient = supabase.createClient(
+          "https://zehjuqavoktgxjqwcqpo.supabase.co",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+          { db: { schema: "public" } }
+        );
+
+        try {
+          // Check if user settings exist
+          const { data: existingSettings, error: checkError } = await supabasePublicClient
+            .from("user_settings")
+            .select("id")
+            .single();
+
+          console.log("Existing settings check:", existingSettings);
+
+          if (checkError && checkError.code !== 'PGRST116') {
+            console.error("Error checking existing settings:", checkError);
+            throw checkError;
+          }
+
+          let result;
+          if (existingSettings) {
+            console.log("Updating existing settings...");
+            // Update existing settings
+            result = await supabasePublicClient
+              .from("user_settings")
+              .update(settings)
+              .eq("id", existingSettings.id)
+              .select();
+          } else {
+            console.log("Creating new settings...");
+            // Insert new settings
+            result = await supabasePublicClient
+              .from("user_settings")
+              .insert([{ ...settings, user_id: "current_user" }])
+              .select();
+          }
+
+          console.log("Save result:", result);
+
+          if (result.error) {
+            console.error("Error saving settings:", result.error);
+            throw result.error;
+          }
+
+          alert("Profile settings saved successfully!");
+          this.reset(); // Clear the form fields
+          await loadUserProfile(); // Reload profile after save
+        } catch (error) {
+          console.error("Error saving profile settings:", error);
+          alert("Error saving profile settings: " + error.message);
+        }
+      });
+
+      // Handle security form submission
+      document.getElementById("securityForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        console.log("Updating password...");
+        
+        const formData = new FormData(this);
+        const currentPassword = formData.get("currentPassword");
+        const newPassword = formData.get("newPassword");
+        const confirmPassword = formData.get("confirmPassword");
+
+        if (newPassword !== confirmPassword) {
+          alert("New passwords do not match!");
+          return;
+        }
+
+        const supabasePublicClient = supabase.createClient(
+          "https://zehjuqavoktgxjqwcqpo.supabase.co",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+          { db: { schema: "public" } }
+        );
+
+        try {
+          // Update password in user_settings
+          const { data, error } = await supabasePublicClient
+            .from("user_settings")
+            .update({ 
+              password: newPassword,
+              updated_at: new Date().toISOString()
+            })
+            .eq("user_id", "current_user")
+            .select();
+
+          console.log("Password update result:", { data, error });
+
+          if (error) {
+            console.error("Error updating password:", error);
+            throw error;
+          }
+
+          alert("Password updated successfully!");
+          this.reset();
+        } catch (error) {
+          console.error("Error updating password:", error);
+          alert("Error updating password: " + error.message);
+        }
+      });
+
+      // Function to load user profile
+      async function loadUserProfile() {
+        console.log("Loading user profile...");
+        const supabasePublicClient = supabase.createClient(
+          "https://zehjuqavoktgxjqwcqpo.supabase.co",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+          { db: { schema: "public" } }
+        );
+
+        try {
+          // Fetch user settings from Supabase
+          const { data: settings, error } = await supabasePublicClient
+            .from("user_settings")
+            .select("*")
+            .single();
+
+          console.log("Fetched profile settings:", settings);
+
+          if (error) {
+            console.error("Error fetching profile:", error);
+            throw error;
+          }
+
+          // Update profile information
+          if (settings) {
+            document.getElementById("profile-name").textContent = settings.fullName || "Not set";
+            document.getElementById("profile-email").textContent = settings.email || "Not set";
+            document.getElementById("profile-phone").textContent = settings.phone || "Not set";
+            document.getElementById("profile-address").textContent = settings.address || "Not set";
+          }
+        } catch (error) {
+          console.error("Error loading profile:", error);
+        }
+      }
+
+      // Load profile when the page loads
+      document.addEventListener("DOMContentLoaded", async function() {
+        await loadUserProfile();
+      });
+
+      // Add event listener for profile navigation
+      document.querySelector('[data-section="profile"]').addEventListener('click', async function() {
+        await loadUserProfile();
+      });
+
+      // Add event listener for settings navigation
+      document.querySelector('[data-section="settings"]').addEventListener('click', async function() {
+        await loadUserSettings(); // This will now clear the form
+      });
+
+      // Function to update dashboard stats
+      async function updateDashboardStats() {
+        console.log("Updating dashboard stats...");
+        const supabasePublicClient = supabase.createClient(
+          "https://zehjuqavoktgxjqwcqpo.supabase.co",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+          { db: { schema: "public" } }
+        );
+
+        try {
+          // Get user name
+          const { data: userSettings } = await supabasePublicClient
+            .from("user_settings")
+            .select("fullName")
+            .single();
+          
+          if (userSettings) {
+            document.getElementById("dashboard-name").textContent = userSettings.fullName;
+          }
+
+          // Get pets count
+          const { count: petsCount } = await supabasePublicClient
+            .from("profile-pets")
+            .select("*", { count: "exact" });
+          
+          document.querySelector('[data-stat="pets"]').textContent = petsCount || 0;
+
+          // Get appointments
+          const { data: appointments } = await supabasePublicClient
+            .from("appointments")
+            .select("*")
+            .order("appointmentDate", { ascending: true });
+
+          if (appointments) {
+            // Update appointments count
+            document.querySelector('[data-stat="appointments"]').textContent = appointments.length;
+            
+            // Update next appointment
+            const nextAppointment = appointments.find(apt => new Date(apt.appointmentDate) >= new Date());
+            if (nextAppointment) {
+              document.querySelector('[data-stat="appointments"]').nextElementSibling.innerHTML = 
+                `<small class="text-muted">Next: ${nextAppointment.appointmentDate}</small>`;
+            }
+
+            // Update total visits
+            const completedVisits = appointments.filter(apt => apt.status === "Completed").length;
+            document.querySelector('[data-stat="visits"]').textContent = completedVisits;
+
+            // Update last visit
+            const lastVisit = appointments
+              .filter(apt => apt.status === "Completed")
+              .sort((a, b) => new Date(b.appointmentDate) - new Date(a.appointmentDate))[0];
+            
+            if (lastVisit) {
+              document.querySelector('[data-stat="last-visit"]').textContent = 
+                new Date(lastVisit.appointmentDate).toLocaleDateString();
+            }
+          }
+        } catch (error) {
+          console.error("Error updating dashboard stats:", error);
+        }
+      }
+
+      // Update dashboard when it's loaded
+      document.querySelector('[data-section="dashboard"]').addEventListener('click', async function() {
+        await updateDashboardStats();
+      });
+
+      // Update dashboard when page loads
+      document.addEventListener("DOMContentLoaded", async function() {
+        await updateDashboardStats();
+      });
+
+      // Add event listeners for Quick Action buttons
+      document.getElementById('viewAppointmentsBtn').addEventListener('click', function() {
+        // Hide all sections
+        document.querySelectorAll('.section-content').forEach(section => {
+          section.style.display = 'none';
+        });
+        
+        // Show appointments section
+        document.getElementById('appointments-section').style.display = 'block';
+        
+        // Update navigation active state
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+        });
+        document.querySelector('[data-section="appointments"]').classList.add('active');
+        
+        // Load appointments
+        loadAppointments();
+      });
+
+      document.getElementById('updateProfileBtn').addEventListener('click', function() {
+        // Hide all sections
+        document.querySelectorAll('.section-content').forEach(section => {
+          section.style.display = 'none';
+        });
+        
+        // Show settings section
+        document.getElementById('settings-section').style.display = 'block';
+        
+        // Update navigation active state
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+        });
+        document.querySelector('[data-section="settings"]').classList.add('active');
+        
+        // Load settings form
+        loadUserSettings();
+      });
+
+      // Add this to your existing script section
+      document.addEventListener('DOMContentLoaded', function() {
+        const bookAppointmentBtn = document.getElementById('bookAppointmentBtn');
+        if (bookAppointmentBtn) {
+          bookAppointmentBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            // Open the schedule appointment modal
+            const scheduleModal = new bootstrap.Modal(document.getElementById('scheduleAppointmentModal'));
+            scheduleModal.show();
+          });
+        }
+      });
+
+      // Add event listener for cancel buttons
+      document.addEventListener('click', async function(e) {
+        if (e.target.closest('.delete-appointment')) {
+          const button = e.target.closest('.delete-appointment');
+          const appointmentId = button.dataset.appointmentId;
+          
+          if (confirm('Are you sure you want to cancel this appointment?')) {
+            try {
+              const supabasePublicClient = supabase.createClient(
+                "https://zehjuqavoktgxjqwcqpo.supabase.co",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+                { db: { schema: "public" } }
+              );
+
+              console.log('Attempting to update appointment status:', appointmentId);
+              
+              const { data, error } = await supabasePublicClient
+                .from('appointments')
+                .update({ status: 'Cancelled' })
+                .eq('id', appointmentId)
+                .select();
+
+              if (error) {
+                console.error('Supabase error:', error);
+                throw error;
+              }
+
+              console.log('Update response:', data);
+
+              // Reload appointments to update the view
+              await loadAppointments();
+              alert('Appointment cancelled successfully!');
+            } catch (error) {
+              console.error('Error cancelling appointment:', error);
+              alert('Error cancelling appointment: ' + (error.message || 'Unknown error'));
+            }
+          }
+        }
+      });
+
+      // Handle navigation
+      document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const section = this.getAttribute('data-section');
+              
+              // Hide all sections
+              document.querySelectorAll('.section-content').forEach(content => {
+                  content.style.display = 'none';
+              });
+              
+              // Show selected section
+              const targetSection = document.getElementById(`${section}-section`);
+              if (targetSection) {
+                  targetSection.style.display = 'block';
+              }
+              
+              // Update active link
+              document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+              this.classList.add('active');
+          });
+      });
+
+      // Add this after the loadPets function
+      async function loadDeletedPets() {
+        try {
+          const { data: pets, error } = await supabasePublicClient
+            .from("profile-pets")
+            .select("*")
+            .eq("status", "Deleted");
+
+          if (error) throw error;
+
+          const deletedPetsContainer = document.getElementById("deleted-pets-container");
+          if (!deletedPetsContainer) return;
+
+          if (pets.length === 0) {
+            deletedPetsContainer.innerHTML = "<p>No deleted pets found.</p>";
+            return;
+          }
+
+          deletedPetsContainer.innerHTML = pets.map(pet => `
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">${pet.petName}</h5>
+                  <p class="card-text">Species: ${pet.petSpecies}</p>
+                  <p class="card-text">Breed: ${pet.petBreed}</p>
+                  <button class="btn btn-outline-success recover-pet" data-pet-id="${pet.id}">
+                    Recover Pet
+                  </button>
+                </div>
+              </div>
+            </div>
+          `).join('');
+
+          // Add event listeners for recover buttons
+          document.querySelectorAll('.recover-pet').forEach(button => {
+            button.addEventListener('click', async function() {
+              const petId = this.getAttribute('data-pet-id');
+              try {
+                const { error } = await supabasePublicClient
+                  .from("profile-pets")
+                  .update({ status: 'Active' })
+                  .eq("id", petId);
+
+                if (error) throw error;
+
+                alert('Pet recovered successfully!');
+                loadPets(); // Reload the pets list
+                loadDeletedPets(); // Reload the deleted pets list
+              } catch (err) {
+                console.error('Error recovering pet:', err);
+                alert('Error recovering pet. Please try again.');
+              }
+            });
+          });
+        } catch (err) {
+          console.error('Error loading deleted pets:', err);
+          alert('Error loading deleted pets. Please try again.');
+        }
+      }
+
+      // Add this to your navigation event listener
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const section = this.getAttribute('data-section');
+          
+          // Hide all sections
+          document.querySelectorAll('.section-content').forEach(content => {
+            content.style.display = 'none';
+          });
+          
+          // Show selected section
+          const targetSection = document.getElementById(`${section}-section`);
+          if (targetSection) {
+            targetSection.style.display = 'block';
+            if (section === 'pets') {
+              loadPets();
+              loadDeletedPets();
+            }
+          }
+          
+          // Update active link
+          document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      const btnUpdatePet = document.querySelector("#updatePet");
+
+      btnUpdatePet.onclick = async function () {
+        const editPetForm = document.getElementById("editPetForm");
+        const petId = editPetForm.getAttribute("data-pet-id");
+        const editPetName = document.querySelector("#edit-pet-name");
+        const editPetSpecies = document.querySelector("#edit-pet-species");
+        const editPetBreed = document.querySelector("#edit-pet-breed");
+
+        const supabasePublicClient = supabase.createClient(
+          "https://zehjuqavoktgxjqwcqpo.supabase.co",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+            { db: { schema: "public" } }
+        );
+
+        try {
+          const { data, error } = await supabasePublicClient
+            .from("profile-pets")
+            .update({
+              petName: editPetName.value,
+              petSpecies: editPetSpecies.value,
+              petBreed: editPetBreed.value
+            })
+            .eq("id", petId)
+            .select();
+
+          if (error) {
+            alert("Error updating pet: " + error.message);
+          } else {
+            // Close modal
+            const modal = bootstrap.Modal.getInstance(
+              document.getElementById("editPetModal")
+            );
+            modal.hide();
+
+            // Reload page to show updated pet information
+            window.location.reload();
+
+            alert("Pet information updated successfully!");
+          }
+        } catch (err) {
+          console.error("Error updating pet:", err);
+          alert(
+            "An error occurred while updating the pet information."
+          );
+        }
+      };
+    </script>
+  </body>
+</html>

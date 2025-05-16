@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form</title>
+    <link rel="stylesheet" href="/login-page/login.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- <form class="login-form" action="/client-page/client.html" method="POST"> -->
+      <form class="login-form" action="/client-page/client.html">
+        <a href="/index.html" atl
+          ><img src="/img/logo.png" alt="Back" class="logo"
+        /></a>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder=""
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder=""
+            required
+          />
+        </div>
+
+        <a class="login-btn" href="/client-page/client.html">Login</a>
+        <!-- <button type="submit">Login</button> -->
+        <p class="register">
+          Not Registered?
+          <a href="/signup-page/signUp.html">Create an Account</a>
+        </p>
+      </form>
+    </div>
+  </body>
+</html>
