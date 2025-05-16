@@ -60,7 +60,9 @@
             <div
               class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
             >
-              <h1 class="h2">Welcome, <span id="dashboard-name">John Doe</span></h1>
+              <h1 class="h2">
+                Welcome, <span id="dashboard-name">John Doe</span>
+              </h1>
             </div>
 
             <!-- Quick Stats -->
@@ -123,22 +125,37 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-3 mb-3">
-                        <button type="button" class="btn btn-primary w-100" id="bookAppointmentBtn">
-                          <i class="fas fa-calendar-plus"></i> Book an Appointment
+                        <button
+                          type="button"
+                          class="btn btn-primary w-100"
+                          id="bookAppointmentBtn"
+                        >
+                          <i class="fas fa-calendar-plus"></i> Book an
+                          Appointment
                         </button>
                       </div>
                       <div class="col-md-3 mb-3">
-                        <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#addPetModal">
+                        <button
+                          class="btn btn-success w-100"
+                          data-bs-toggle="modal"
+                          data-bs-target="#addPetModal"
+                        >
                           <i class="fas fa-paw"></i> Add New Pet
                         </button>
                       </div>
                       <div class="col-md-3 mb-3">
-                        <button class="btn btn-info w-100" id="viewAppointmentsBtn">
+                        <button
+                          class="btn btn-info w-100"
+                          id="viewAppointmentsBtn"
+                        >
                           <i class="fas fa-list"></i> View All Appointments
                         </button>
                       </div>
                       <div class="col-md-3 mb-3">
-                        <button class="btn btn-secondary w-100" id="updateProfileBtn">
+                        <button
+                          class="btn btn-secondary w-100"
+                          id="updateProfileBtn"
+                        >
                           <i class="fas fa-user"></i> Update Profile
                         </button>
                       </div>
@@ -282,13 +299,27 @@
                           </p>
                           <div class="pet-details">
                             <small class="text-muted">
-                              ${pets[i].notes ? 
-                                `Age: ${pets[i].notes.split(',')[1]?.trim() || 'Not specified'}, 
-                                Sex: ${pets[i].notes.split(',')[0]?.split(':')[1]?.trim() || 'Not specified'}
-                                ${pets[i].notes.includes('Notes:') ? 
-                                  `<br>Notes: ${pets[i].notes.split('Notes:')[1]?.trim()}` : 
-                                  ''}` : 
-                                'No additional information'}
+                              ${
+                                pets[i].notes
+                                  ? `Age: ${
+                                      pets[i].notes.split(",")[1]?.trim() ||
+                                      "Not specified"
+                                    },
+                                Sex: ${
+                                  pets[i].notes
+                                    .split(",")[0]
+                                    ?.split(":")[1]
+                                    ?.trim() || "Not specified"
+                                }
+                                ${
+                                  pets[i].notes.includes("Notes:")
+                                    ? `<br>Notes: ${pets[i].notes
+                                        .split("Notes:")[1]
+                                        ?.trim()}`
+                                    : ""
+                                }`
+                                  : "No additional information"
+                              }
                             </small>
                           </div>
                         </div>
@@ -303,7 +334,7 @@
                             data-pet-name="${pets[i].petName}"
                             data-pet-species="${pets[i].petSpecies}"
                             data-pet-breed="${pets[i].petBreed}"
-                            data-pet-notes="${pets[i].notes || ''}"
+                            data-pet-notes="${pets[i].notes || ""}"
                           >
                             <i class="fas fa-edit"></i>
                           </button>
@@ -340,7 +371,7 @@
                       try {
                         const { error } = await supabasePublicClient
                           .from("profile-pets")
-                          .update({ status: 'Deleted' })
+                          .update({ status: "Deleted" })
                           .eq("id", petId);
 
                         if (error) {
@@ -569,21 +600,50 @@
                     <form id="profileForm">
                       <div class="mb-3">
                         <label class="form-label">Full Name</label>
-                        <input type="text" class="form-control" name="fullName" required placeholder="Enter your full name" title="Full Name" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="fullName"
+                          required
+                          placeholder="Enter your full name"
+                          title="Full Name"
+                        />
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" required placeholder="Enter your email" title="Email" />
+                        <input
+                          type="email"
+                          class="form-control"
+                          name="email"
+                          required
+                          placeholder="Enter your email"
+                          title="Email"
+                        />
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" name="phone" required placeholder="Enter your phone number" title="Phone Number" />
+                        <input
+                          type="tel"
+                          class="form-control"
+                          name="phone"
+                          required
+                          placeholder="Enter your phone number"
+                          title="Phone Number"
+                        />
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Address</label>
-                        <textarea class="form-control" name="address" rows="2" placeholder="Enter your address" title="Address"></textarea>
+                        <textarea
+                          class="form-control"
+                          name="address"
+                          rows="2"
+                          placeholder="Enter your address"
+                          title="Address"
+                        ></textarea>
                       </div>
-                      <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                      <button type="submit" class="btn btn-primary w-100">
+                        Save Changes
+                      </button>
                     </form>
                   </div>
                 </div>
@@ -597,17 +657,34 @@
                     <form id="securityForm">
                       <div class="mb-3">
                         <label class="form-label">Current Password</label>
-                        <input type="password" class="form-control" name="currentPassword" placeholder="Enter current password" />
+                        <input
+                          type="password"
+                          class="form-control"
+                          name="currentPassword"
+                          placeholder="Enter current password"
+                        />
                       </div>
                       <div class="mb-3">
                         <label class="form-label">New Password</label>
-                        <input type="password" class="form-control" name="newPassword" placeholder="Enter new password" />
+                        <input
+                          type="password"
+                          class="form-control"
+                          name="newPassword"
+                          placeholder="Enter new password"
+                        />
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Confirm New Password</label>
-                        <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm new password" />
+                        <input
+                          type="password"
+                          class="form-control"
+                          name="confirmPassword"
+                          placeholder="Confirm new password"
+                        />
                       </div>
-                      <button type="submit" class="btn btn-primary w-100">Update Password</button>
+                      <button type="submit" class="btn btn-primary w-100">
+                        Update Password
+                      </button>
                     </form>
                   </div>
                 </div>
@@ -705,13 +782,53 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Schedule New Appointment</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              title="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <form id="appointmentForm">
               <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="enter name"
+                  class="form-control"
+                  style="text-indent: 4px"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input
+                  type="text"
+                  id="email"
+                  placeholder="enter email"
+                  class="form-control"
+                  style="text-indent: 4px"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <input
+                  type="text"
+                  id="phone"
+                  placeholder="enter phone number"
+                  class="form-control"
+                  style="text-indent: 4px"
+                />
+              </div>
+              <div class="mb-3">
                 <label class="form-label">Pet Name</label>
-                <select class="form-select" name="petName" required title="Pet Name">
+                <select
+                  class="form-select"
+                  name="petName"
+                  required
+                  title="Pet Name"
+                >
                   <option value="">Select your pet</option>
                 </select>
               </div>
@@ -719,64 +836,109 @@
                 <label class="form-label">Service Type</label>
                 <div class="service-options">
                   <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" name="serviceType" value="Full & Basic Grooming" data-price="1500" id="service1">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="serviceType"
+                      value="Full & Basic Grooming"
+                      data-price="1500"
+                      id="service1"
+                    />
                     <label class="form-check-label" for="service1">
                       Full & Basic Grooming - ₱1,500
                     </label>
                   </div>
                   <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" name="serviceType" value="Bath & Blowdry" data-price="800" id="service2">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="serviceType"
+                      value="Bath & Blowdry"
+                      data-price="800"
+                      id="service2"
+                    />
                     <label class="form-check-label" for="service2">
                       Bath & Blowdry - ₱800
                     </label>
                   </div>
                   <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" name="serviceType" value="Haircut" data-price="1200" id="service3">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="serviceType"
+                      value="Haircut"
+                      data-price="1200"
+                      id="service3"
+                    />
                     <label class="form-check-label" for="service3">
                       Haircut - ₱1,200
                     </label>
                   </div>
                   <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" name="serviceType" value="Nail Trim" data-price="300" id="service4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="serviceType"
+                      value="Nail Trim"
+                      data-price="300"
+                      id="service4"
+                    />
                     <label class="form-check-label" for="service4">
                       Nail Trim - ₱300
                     </label>
                   </div>
                   <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" name="serviceType" value="Ear Cleaning" data-price="400" id="service5">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="serviceType"
+                      value="Ear Cleaning"
+                      data-price="400"
+                      id="service5"
+                    />
                     <label class="form-check-label" for="service5">
                       Ear Cleaning - ₱400
                     </label>
                   </div>
                   <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" name="serviceType" value="Teeth Brushing" data-price="500" id="service6">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="serviceType"
+                      value="Teeth Brushing"
+                      data-price="500"
+                      id="service6"
+                    />
                     <label class="form-check-label" for="service6">
                       Teeth Brushing - ₱500
                     </label>
                   </div>
                 </div>
                 <div class="mt-2">
-                  <strong>Total Price: ₱<span id="totalPrice">0.00</span></strong>
+                  <strong
+                    >Total Price: ₱<span id="totalPrice">0.00</span></strong
+                  >
                 </div>
               </div>
               <div class="mb-3">
-                <label class="form-label">Preferred Staff</label>
-                <select class="form-select" name="preferredStaff" title="Preferred Staff">
-                  <option value="">Select staff member (Optional)</option>
-                  <option value="staff1">John Smith - Senior Groomer</option>
-                  <option value="staff2">Sarah Johnson - Pet Stylist</option>
-                  <option value="staff3">Mike Wilson - Grooming Specialist</option>
-                  <option value="staff4">Emily Brown - Pet Care Expert</option>
-                </select>
-                <small class="form-text text-muted">You can leave this blank if you don't have a preferred staff member.</small>
-              </div>
-              <div class="mb-3">
                 <label class="form-label">Preferred Date</label>
-                <input type="date" class="form-control" name="appointmentDate" required title="Preferred Date" min="">
+                <input
+                  type="date"
+                  class="form-control"
+                  name="appointmentDate"
+                  required
+                  title="Preferred Date"
+                  min=""
+                />
               </div>
               <div class="mb-3">
                 <label class="form-label">Preferred Time</label>
-                <select class="form-select" name="appointmentTime" required title="Preferred Time">
+                <select
+                  class="form-select"
+                  name="appointmentTime"
+                  required
+                  title="Preferred Time"
+                >
                   <option value="">Select time</option>
                   <option value="09:00">9:00 AM</option>
                   <option value="10:00">10:00 AM</option>
@@ -789,14 +951,35 @@
               </div>
               <div class="mb-3">
                 <label class="form-label">Special Requests (Optional)</label>
-                <textarea class="form-control" name="specialRequests" rows="2" title="Special Requests" placeholder="Add any special instructions or requests for your pet's service (optional)"></textarea>
-                <small class="form-text text-muted">You can leave this blank if you don't have any special requests.</small>
+                <textarea
+                  class="form-control"
+                  name="specialRequests"
+                  rows="2"
+                  title="Special Requests"
+                  placeholder="Add any special instructions or requests for your pet's service (optional)"
+                ></textarea>
+                <small class="form-text text-muted"
+                  >You can leave this blank if you don't have any special
+                  requests.</small
+                >
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="scheduleAppointment">Schedule</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="scheduleAppointment"
+            >
+              Schedule
+            </button>
           </div>
         </div>
       </div>
@@ -887,7 +1070,9 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label class="form-label">Notes (Allergies, Special Care, etc.)</label>
+                <label class="form-label"
+                  >Notes (Allergies, Special Care, etc.)</label
+                >
                 <textarea
                   id="pet-notes"
                   class="form-control"
@@ -998,7 +1183,9 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label class="form-label">Notes (Allergies, Special Care, etc.)</label>
+                <label class="form-label"
+                  >Notes (Allergies, Special Care, etc.)</label
+                >
                 <textarea
                   id="edit-pet-notes"
                   class="form-control"
@@ -1049,6 +1236,369 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
     <script src="client.js"></script>
     <script>
+      // Function to load appointments
+      async function loadAppointments() {
+        console.log("Loading appointments...");
+        const appointmentsList = document.querySelector(
+          ".upcoming-appointments-list"
+        );
+        const recentAppointmentsBody = document.getElementById(
+          "recent-appointments-body"
+        );
+        const completedAppointmentsBody = document.getElementById(
+          "completed-appointments-body"
+        );
+        const dashboardRecentAppointments = document.getElementById(
+          "dashboard-recent-appointments"
+        );
+
+        // Service prices mapping
+        const servicePrices = {
+          "Full & Basic Grooming": 1500.0,
+          "Bath & Blowdry": 800.0,
+          Haircut: 1200.0,
+          "Nail Trim": 300.0,
+          "Ear Cleaning": 400.0,
+          "Teeth Brushing": 500.0,
+        };
+
+        try {
+          const supabasePublicClient = supabase.createClient(
+            "https://zehjuqavoktgxjqwcqpo.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+            { db: { schema: "public" } }
+          );
+
+          // Fetch appointments from newAppointments table
+          const { data: appointments, error } = await supabasePublicClient
+            .from("newAppointments")
+            .select("*")
+            .order("appointmentDate", { ascending: true });
+
+          if (error) {
+            console.error("Error fetching appointments:", error);
+            throw error;
+          }
+
+          console.log("All appointments:", appointments);
+
+          // Filter appointments
+          const today = new Date();
+          const upcomingAppointments = appointments.filter((apt) => {
+            const isUpcoming = new Date(apt.appointmentDate) >= today;
+            const isNotCancelled = apt.status !== "Cancelled";
+            const isNotCompleted = apt.status !== "Completed";
+            console.log(`Appointment ${apt.id}:`, {
+              date: apt.appointmentDate,
+              status: apt.status,
+              isUpcoming,
+              isNotCancelled,
+              isNotCompleted,
+              included: isUpcoming && isNotCancelled && isNotCompleted,
+            });
+            return isUpcoming && isNotCancelled && isNotCompleted;
+          });
+
+          console.log("Filtered upcoming appointments:", upcomingAppointments);
+
+          const recentAppointments = appointments.filter(
+            (apt) => apt.status !== "Completed" && apt.status !== "Cancelled"
+          );
+
+          const completedAppointments = appointments.filter(
+            (apt) => apt.status === "Completed"
+          );
+
+          // Clear existing content
+          if (appointmentsList) appointmentsList.innerHTML = "";
+          if (recentAppointmentsBody) recentAppointmentsBody.innerHTML = "";
+          if (completedAppointmentsBody)
+            completedAppointmentsBody.innerHTML = "";
+          if (dashboardRecentAppointments)
+            dashboardRecentAppointments.innerHTML = "";
+
+          if (!appointments || appointments.length === 0) {
+            if (appointmentsList)
+              appointmentsList.innerHTML =
+                '<div class="list-group-item">No appointments scheduled</div>';
+            if (recentAppointmentsBody)
+              recentAppointmentsBody.innerHTML =
+                '<tr><td colspan="6" style="text-align: center;">No recent appointments</td></tr>';
+            if (completedAppointmentsBody)
+              completedAppointmentsBody.innerHTML =
+                '<tr><td colspan="6" style="text-align: center;">No completed appointments</td></tr>';
+            if (dashboardRecentAppointments)
+              dashboardRecentAppointments.innerHTML =
+                '<tr><td colspan="6" style="text-align: center;">No recent appointments</td></tr>';
+            return;
+          }
+
+          // Update appointment count in dashboard
+          const appointmentCount = document.querySelector(
+            '[data-stat="appointments"]'
+          );
+          if (appointmentCount) {
+            console.log(
+              "Setting appointment count to:",
+              upcomingAppointments.length
+            );
+            appointmentCount.textContent = upcomingAppointments.length;
+          }
+
+          // Display upcoming appointments
+          if (appointmentsList) {
+            appointmentsList.innerHTML = upcomingAppointments
+              .map((appointment) => {
+                // Handle single service or multiple services
+                const services = appointment.serviceType.includes(", ")
+                  ? appointment.serviceType.split(", ")
+                  : [appointment.serviceType];
+
+                // Use price from appointment if available, otherwise calculate
+                const totalPrice =
+                  appointment.price ||
+                  services.reduce(
+                    (sum, service) => sum + (servicePrices[service] || 0),
+                    0
+                  );
+
+                return `
+                <div class="list-group-item">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1">${appointment.serviceType}</h6>
+                    <small>${new Date(
+                      appointment.appointmentDate
+                    ).toLocaleDateString()} at ${
+                  appointment.appointmentTime
+                }</small>
+                  </div>
+                  <p class="mb-1">Client: ${
+                    appointment.name || "Not specified"
+                  }</p>
+                  <p class="mb-1">Pet: ${appointment.petName}</p>
+                  <p class="mb-1">${
+                    appointment.specialRequests || "No special requests"
+                  }</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">Status: ${
+                      appointment.status || "Pending"
+                    }</small>
+                    <small class="text-muted">Total Price: ₱${totalPrice.toFixed(
+                      2
+                    )}</small>
+                    <button class="btn btn-sm btn-danger delete-appointment" data-appointment-id="${
+                      appointment.id
+                    }">
+                      <i class="fas fa-trash"></i> Cancel
+                    </button>
+                  </div>
+                </div>
+              `;
+              })
+              .join("");
+          }
+
+          // Display recent appointments
+          if (recentAppointmentsBody) {
+            recentAppointmentsBody.innerHTML = recentAppointments
+              .map((appointment) => {
+                // Handle single service or multiple services
+                const services = appointment.serviceType.includes(", ")
+                  ? appointment.serviceType.split(", ")
+                  : [appointment.serviceType];
+
+                // Use price from appointment if available, otherwise calculate
+                const totalPrice =
+                  appointment.price ||
+                  services.reduce(
+                    (sum, service) => sum + (servicePrices[service] || 0),
+                    0
+                  );
+
+                return `
+                <tr>
+                  <td>${new Date(
+                    appointment.appointmentDate
+                  ).toLocaleDateString()}</td>
+                  <td>${appointment.appointmentTime}</td>
+                  <td>${appointment.petName}</td>
+                  <td>${appointment.serviceType}</td>
+                  <td>₱${totalPrice.toFixed(2)}</td>
+                  <td><span class="badge bg-warning">${
+                    appointment.status || "Pending"
+                  }</span></td>
+                </tr>
+              `;
+              })
+              .join("");
+          }
+
+          // Display completed appointments
+          if (completedAppointmentsBody) {
+            completedAppointmentsBody.innerHTML = completedAppointments
+              .map((appointment) => {
+                // Handle single service or multiple services
+                const services = appointment.serviceType.includes(", ")
+                  ? appointment.serviceType.split(", ")
+                  : [appointment.serviceType];
+
+                // Use price from appointment if available, otherwise calculate
+                const totalPrice =
+                  appointment.price ||
+                  services.reduce(
+                    (sum, service) => sum + (servicePrices[service] || 0),
+                    0
+                  );
+
+                return `
+                <tr>
+                  <td>${new Date(
+                    appointment.appointmentDate
+                  ).toLocaleDateString()}</td>
+                  <td>${appointment.appointmentTime}</td>
+                  <td>${appointment.petName}</td>
+                  <td>${appointment.serviceType}</td>
+                  <td>₱${totalPrice.toFixed(2)}</td>
+                  <td><span class="badge bg-success">Completed</span></td>
+                </tr>
+              `;
+              })
+              .join("");
+          }
+
+          // Display recent appointments in dashboard
+          if (dashboardRecentAppointments) {
+            dashboardRecentAppointments.innerHTML = recentAppointments
+              .slice(0, 5)
+              .map((appointment) => {
+                // Handle single service or multiple services
+                const services = appointment.serviceType.includes(", ")
+                  ? appointment.serviceType.split(", ")
+                  : [appointment.serviceType];
+
+                // Use price from appointment if available, otherwise calculate
+                const totalPrice =
+                  appointment.price ||
+                  services.reduce(
+                    (sum, service) => sum + (servicePrices[service] || 0),
+                    0
+                  );
+
+                return `
+                <tr>
+                  <td>${new Date(
+                    appointment.appointmentDate
+                  ).toLocaleDateString()}</td>
+                  <td>${appointment.appointmentTime}</td>
+                  <td>${appointment.petName}</td>
+                  <td>${appointment.serviceType}</td>
+                  <td>₱${totalPrice.toFixed(2)}</td>
+                  <td><span class="badge bg-warning">${
+                    appointment.status || "Pending"
+                  }</span></td>
+                </tr>
+              `;
+              })
+              .join("");
+          }
+        } catch (error) {
+          console.error("Error loading appointments:", error);
+          if (appointmentsList)
+            appointmentsList.innerHTML =
+              '<div class="list-group-item text-danger">Error loading appointments. Please try again.</div>';
+          if (recentAppointmentsBody)
+            recentAppointmentsBody.innerHTML =
+              '<tr><td colspan="6" class="text-danger">Error loading recent appointments. Please try again.</td></tr>';
+          if (completedAppointmentsBody)
+            completedAppointmentsBody.innerHTML =
+              '<tr><td colspan="6" class="text-danger">Error loading completed appointments. Please try again.</td></tr>';
+          if (dashboardRecentAppointments)
+            dashboardRecentAppointments.innerHTML =
+              '<tr><td colspan="6" class="text-danger">Error loading recent appointments. Please try again.</td></tr>';
+        }
+      }
+
+      // Load appointments when the page loads
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadAppointments();
+      });
+
+      // Add event listener for appointments navigation
+      document
+        .querySelector('[data-section="appointments"]')
+        .addEventListener("click", async function () {
+          await loadAppointments();
+        });
+
+      // Load user settings when the page loads
+      document.addEventListener("DOMContentLoaded", async function () {
+        console.log("Page loaded, loading user settings...");
+        await loadUserSettings();
+      });
+
+      // Add this to your existing script section
+      document.addEventListener("DOMContentLoaded", function () {
+        const bookAppointmentBtn =
+          document.getElementById("bookAppointmentBtn");
+        if (bookAppointmentBtn) {
+          bookAppointmentBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            // Open the schedule appointment modal
+            const scheduleModal = new bootstrap.Modal(
+              document.getElementById("scheduleAppointmentModal")
+            );
+            scheduleModal.show();
+          });
+        }
+      });
+
+      // Add event listener for cancel buttons
+      document.addEventListener("click", async function (e) {
+        if (e.target.closest(".delete-appointment")) {
+          const button = e.target.closest(".delete-appointment");
+          const appointmentId = button.dataset.appointmentId;
+
+          if (confirm("Are you sure you want to cancel this appointment?")) {
+            try {
+              const supabasePublicClient = supabase.createClient(
+                "https://zehjuqavoktgxjqwcqpo.supabase.co",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+                { db: { schema: "public" } }
+              );
+
+              console.log(
+                "Attempting to update appointment status:",
+                appointmentId
+              );
+
+              const { data, error } = await supabasePublicClient
+                .from("newAppointments")
+                .update({ status: "Cancelled" })
+                .eq("id", appointmentId)
+                .select();
+
+              if (error) {
+                console.error("Supabase error:", error);
+                throw error;
+              }
+
+              console.log("Update response:", data);
+
+              // Reload appointments to update the view
+              await loadAppointments();
+              alert("Appointment cancelled successfully!");
+            } catch (error) {
+              console.error("Error cancelling appointment:", error);
+              alert(
+                "Error cancelling appointment: " +
+                  (error.message || "Unknown error")
+              );
+            }
+          }
+        }
+      });
+
       // Handle sidebar navigation
       document.addEventListener("DOMContentLoaded", function () {
         // Get all navigation links
@@ -1090,61 +1640,69 @@
         });
 
         // Load pets into the appointment form when the modal opens
-        document.getElementById('scheduleAppointmentModal').addEventListener('show.bs.modal', async function () {
-          console.log("Loading pets for appointment form...");
-          const petSelect = document.querySelector('#appointmentForm select[name="petName"]');
-          const dateInput = document.querySelector('#appointmentForm input[name="appointmentDate"]');
-          
-          // Set minimum date to today
-          const today = new Date().toISOString().split('T')[0];
-          dateInput.min = today;
-
-          try {
-            const supabasePublicClient = supabase.createClient(
-              "https://zehjuqavoktgxjqwcqpo.supabase.co",
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
-              { db: { schema: "public" } }
+        document
+          .getElementById("scheduleAppointmentModal")
+          .addEventListener("show.bs.modal", async function () {
+            console.log("Loading pets for appointment form...");
+            const petSelect = document.querySelector(
+              '#appointmentForm select[name="petName"]'
+            );
+            const dateInput = document.querySelector(
+              '#appointmentForm input[name="appointmentDate"]'
             );
 
-            // Fetch pets from Supabase
-            const { data: pets, error } = await supabasePublicClient
-              .from("profile-pets")
-              .select("*");
+            // Set minimum date to today
+            const today = new Date().toISOString().split("T")[0];
+            dateInput.min = today;
 
-            console.log("Fetched pets:", pets);
+            try {
+              const supabasePublicClient = supabase.createClient(
+                "https://zehjuqavoktgxjqwcqpo.supabase.co",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+                { db: { schema: "public" } }
+              );
 
-            if (error) {
-              console.error("Error fetching pets:", error);
-              throw error;
+              // Fetch pets from Supabase
+              const { data: pets, error } = await supabasePublicClient
+                .from("profile-pets")
+                .select("*");
+
+              console.log("Fetched pets:", pets);
+
+              if (error) {
+                console.error("Error fetching pets:", error);
+                throw error;
+              }
+
+              // Clear existing options
+              petSelect.innerHTML = '<option value="">Select your pet</option>';
+
+              // Add pets to select
+              pets.forEach((pet) => {
+                const option = document.createElement("option");
+                option.value = pet.petName;
+                option.textContent = `${pet.petName} (${pet.petSpecies})`;
+                petSelect.appendChild(option);
+              });
+            } catch (error) {
+              console.error("Error loading pets:", error);
+              alert("Error loading pets. Please try again.");
             }
-
-            // Clear existing options
-            petSelect.innerHTML = '<option value="">Select your pet</option>';
-
-            // Add pets to select
-            pets.forEach(pet => {
-              const option = document.createElement('option');
-              option.value = pet.petName;
-              option.textContent = `${pet.petName} (${pet.petSpecies})`;
-              petSelect.appendChild(option);
-            });
-          } catch (error) {
-            console.error("Error loading pets:", error);
-            alert("Error loading pets. Please try again.");
-          }
-        });
+          });
 
         // Add this before the scheduleButton event listener
         // Calculate total price when services are selected
-        const serviceCheckboxes = document.querySelectorAll('input[name="serviceType"]');
-        const totalPriceSpan = document.getElementById('totalPrice');
+        const serviceCheckboxes = document.querySelectorAll(
+          'input[name="serviceType"]'
+        );
+        const totalPriceSpan = document.getElementById("totalPrice");
         const scheduleButton = document.getElementById("scheduleAppointment");
         const appointmentForm = document.getElementById("appointmentForm");
 
-        serviceCheckboxes.forEach(checkbox => {
-          checkbox.addEventListener('change', function() {
+        serviceCheckboxes.forEach((checkbox) => {
+          checkbox.addEventListener("change", function () {
             let total = 0;
-            serviceCheckboxes.forEach(cb => {
+            serviceCheckboxes.forEach((cb) => {
               if (cb.checked) {
                 total += parseFloat(cb.dataset.price);
               }
@@ -1168,12 +1726,19 @@
               selectedServices,
               appointmentDate,
               appointmentTime,
-              specialRequests
+              specialRequests,
             });
 
             // Validate required fields
-            if (!petName || selectedServices.length === 0 || !appointmentDate || !appointmentTime) {
-              alert("Please fill in all required fields (Pet Name, at least one Service, Date, and Time)");
+            if (
+              !petName ||
+              selectedServices.length === 0 ||
+              !appointmentDate ||
+              !appointmentTime
+            ) {
+              alert(
+                "Please fill in all required fields (Pet Name, at least one Service, Date, and Time)"
+              );
               return;
             }
 
@@ -1188,12 +1753,15 @@
               const servicePrices = {
                 "Full & Basic Grooming": 1500,
                 "Bath & Blowdry": 800,
-                "Haircut": 1200,
+                Haircut: 1200,
                 "Nail Trim": 300,
                 "Ear Cleaning": 400,
-                "Teeth Brushing": 500
+                "Teeth Brushing": 500,
               };
-              const totalPrice = selectedServices.reduce((sum, service) => sum + servicePrices[service], 0);
+              const totalPrice = selectedServices.reduce(
+                (sum, service) => sum + servicePrices[service],
+                0
+              );
 
               console.log("Creating appointment with data:", {
                 petName,
@@ -1202,20 +1770,26 @@
                 appointmentTime,
                 specialRequests,
                 status: "Pending",
-                price: totalPrice
+                price: totalPrice,
               });
 
+              const name = document.querySelector("input#name");
+              const email = document.querySelector("input#email");
+              const phone = document.querySelector("input#phone");
               // Insert appointment into Supabase
               const { data, error } = await supabasePublicClient
-                .from("appointments")
+                .from("newAppointments")
                 .insert({
+                  name: name.value,
+                  email: email.value,
+                  phone: phone.value,
                   petName,
                   serviceType: selectedServices.join(", "),
                   appointmentDate,
                   appointmentTime,
                   specialRequests,
                   status: "Pending",
-                  price: totalPrice
+                  price: totalPrice,
                 })
                 .select();
 
@@ -1227,20 +1801,24 @@
               console.log("Appointment created successfully:", data);
 
               // Close modal and reset form
-              const modal = bootstrap.Modal.getInstance(document.getElementById("scheduleAppointmentModal"));
+              const modal = bootstrap.Modal.getInstance(
+                document.getElementById("scheduleAppointmentModal")
+              );
               modal.hide();
               appointmentForm.reset();
-              document.getElementById('totalPrice').textContent = "0.00";
+              document.getElementById("totalPrice").textContent = "0.00";
 
               // Show success message
               alert("Appointment scheduled successfully!");
 
               // Reload appointments to show the new one
               await loadAppointments();
-
             } catch (error) {
               console.error("Error scheduling appointment:", error);
-              alert("Error scheduling appointment: " + (error.message || "Please try again."));
+              alert(
+                "Error scheduling appointment: " +
+                  (error.message || "Please try again.")
+              );
             }
           });
         } else {
@@ -1248,7 +1826,7 @@
         }
 
         // Load existing appointments when page loads
-        document.addEventListener("DOMContentLoaded", async function() {
+        document.addEventListener("DOMContentLoaded", async function () {
           const supabasePublicClient = supabase.createClient(
             "https://zehjuqavoktgxjqwcqpo.supabase.co",
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
@@ -1257,8 +1835,8 @@
 
           try {
             // Fetch appointments from Supabase
-            const { data: appointments, error } = await supabasePublicClient
-              .from("appointments")
+            const { data: dataAppointments, error } = await supabasePublicClient
+              .from("newAppointments")
               .select("*")
               .order("appointmentDate", { ascending: false });
 
@@ -1266,31 +1844,58 @@
               throw error;
             }
 
+            console.log(`my appointments`);
+            console.log(appointments);
+
             // Update appointment count
-            const appointmentCount = document.querySelector('[data-stat="appointments"]');
-            appointmentCount.textContent = appointments.length;
+            const appointmentCount = document.querySelector(
+              '[data-stat="appointments"]'
+            );
+            appointmentCount.textContent = dataAppointments.length;
 
             // Populate upcoming appointments in dashboard
-            const upcomingAppointments = document.querySelector(".upcoming-appointments-list");
-            const recentAppointmentsBody = document.getElementById("recent-appointments-body");
-            const completedAppointmentsBody = document.getElementById("completed-appointments-body");
-            const dashboardRecentAppointments = document.getElementById("dashboard-recent-appointments");
+            const upcomingAppointments = document.querySelector(
+              ".upcoming-appointments-list"
+            );
+            const recentAppointmentsBody = document.getElementById(
+              "recent-appointments-body"
+            );
+            const completedAppointmentsBody = document.getElementById(
+              "completed-appointments-body"
+            );
+            const dashboardRecentAppointments = document.getElementById(
+              "dashboard-recent-appointments"
+            );
 
-            appointments.forEach(appointment => {
+            dataAppointments.forEach((appointment) => {
               // Add to upcoming appointments
               const appointmentCard = document.createElement("div");
               appointmentCard.className = "list-group-item";
               appointmentCard.innerHTML = `
                 <div class="d-flex w-100 justify-content-between">
                   <h6 class="mb-1">${appointment.serviceType}</h6>
-                  <small>${new Date(appointment.appointmentDate).toLocaleDateString()} at ${appointment.appointmentTime}</small>
+                  <small>${new Date(
+                    appointment.appointmentDate
+                  ).toLocaleDateString()} at ${
+                appointment.appointmentTime
+              }</small>
                 </div>
-                <p class="mb-1">Pet: ${appointment.petName} (${appointment.petType})</p>
-                <p class="mb-1">${appointment.specialRequests || "No special requests"}</p>
+                <p class="mb-1">Pet: ${appointment.petName} (${
+                appointment.petType
+              })</p>
+                <p class="mb-1">${
+                  appointment.specialRequests || "No special requests"
+                }</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <small class="text-muted">Status: ${appointment.status}</small>
-                  <small class="text-muted">Price: ₱${servicePrices[appointment.serviceType]?.toFixed(2) || '0.00'}</small>
-                  <button class="btn btn-sm btn-danger delete-appointment" data-appointment-id="${appointment.id}">
+                  <small class="text-muted">Status: ${
+                    appointment.status
+                  }</small>
+                  <small class="text-muted">Price: ₱${
+                    servicePrices[appointment.serviceType]?.toFixed(2) || "0.00"
+                  }</small>
+                  <button class="btn btn-sm btn-danger delete-appointment" data-appointment-id="${
+                    appointment.id
+                  }">
                     <i class="fas fa-trash"></i> Cancel
                   </button>
                 </div>
@@ -1304,8 +1909,12 @@
                 <td>${appointment.appointmentTime}</td>
                 <td>${appointment.petName}</td>
                 <td>${appointment.serviceType}</td>
-                <td>₱${servicePrices[appointment.serviceType]?.toFixed(2) || '0.00'}</td>
-                <td><span class="badge bg-warning">${appointment.status}</span></td>
+                <td>₱${
+                  servicePrices[appointment.serviceType]?.toFixed(2) || "0.00"
+                }</td>
+                <td><span class="badge bg-warning">${
+                  appointment.status
+                }</span></td>
               `;
               recentAppointmentsBody.appendChild(historyRow);
             });
@@ -1326,7 +1935,13 @@
             const petAge = document.querySelector("#pet-age");
             const petNotes = document.querySelector("#pet-notes");
 
-            if (!petName.value || !petSpecies.value || !petBreed.value || !petSex.value || !petAge.value) {
+            if (
+              !petName.value ||
+              !petSpecies.value ||
+              !petBreed.value ||
+              !petSex.value ||
+              !petAge.value
+            ) {
               alert("Please fill in all required fields");
               return;
             }
@@ -1346,7 +1961,9 @@
                   petSpecies: petSpecies.value,
                   petBreed: petBreed.value,
                   // Store additional information in the notes field temporarily
-                  notes: `Sex: ${petSex.value}, Age: ${petAge.value} years${petNotes.value ? `, Notes: ${petNotes.value}` : ''}`
+                  notes: `Sex: ${petSex.value}, Age: ${petAge.value} years${
+                    petNotes.value ? `, Notes: ${petNotes.value}` : ""
+                  }`,
                 })
                 .select();
 
@@ -1355,7 +1972,9 @@
               }
 
               // Close modal
-              const modal = bootstrap.Modal.getInstance(document.getElementById("addPetModal"));
+              const modal = bootstrap.Modal.getInstance(
+                document.getElementById("addPetModal")
+              );
               modal.hide();
 
               // Reset form
@@ -1368,204 +1987,12 @@
               window.location.reload();
             } catch (err) {
               console.error("Error adding pet:", err);
-              alert("Error adding pet: " + (err.message || "Please try again."));
+              alert(
+                "Error adding pet: " + (err.message || "Please try again.")
+              );
             }
           });
         }
-      });
-
-      // Function to load appointments
-      async function loadAppointments() {
-        console.log("Loading appointments...");
-        const appointmentsList = document.querySelector('.upcoming-appointments-list');
-        const recentAppointmentsBody = document.getElementById('recent-appointments-body');
-        const completedAppointmentsBody = document.getElementById('completed-appointments-body');
-        const dashboardRecentAppointments = document.getElementById('dashboard-recent-appointments');
-        
-        // Service prices mapping
-        const servicePrices = {
-          "Full & Basic Grooming": 1500.00,
-          "Bath & Blowdry": 800.00,
-          "Haircut": 1200.00,
-          "Nail Trim": 300.00,
-          "Ear Cleaning": 400.00,
-          "Teeth Brushing": 500.00
-        };
-        
-        try {
-          const supabasePublicClient = supabase.createClient(
-            "https://zehjuqavoktgxjqwcqpo.supabase.co",
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
-            { db: { schema: "public" } }
-          );
-
-          // Fetch appointments from Supabase
-          const { data: appointments, error } = await supabasePublicClient
-            .from("appointments")
-            .select("*")
-            .order('appointmentDate', { ascending: true });
-
-          if (error) {
-            console.error("Error fetching appointments:", error);
-            throw error;
-          }
-
-          console.log("All appointments:", appointments);
-
-          // Filter appointments
-          const today = new Date();
-          const upcomingAppointments = appointments.filter(apt => {
-            const isUpcoming = new Date(apt.appointmentDate) >= today;
-            const isNotCancelled = apt.status !== 'Cancelled';
-            const isNotCompleted = apt.status !== 'Completed';
-            console.log(`Appointment ${apt.id}:`, {
-              date: apt.appointmentDate,
-              status: apt.status,
-              isUpcoming,
-              isNotCancelled,
-              isNotCompleted,
-              included: isUpcoming && isNotCancelled && isNotCompleted
-            });
-            return isUpcoming && isNotCancelled && isNotCompleted;
-          });
-
-          console.log("Filtered upcoming appointments:", upcomingAppointments);
-          
-          const recentAppointments = appointments.filter(apt => 
-            apt.status !== 'Completed' && apt.status !== 'Cancelled'
-          );
-          
-          const completedAppointments = appointments.filter(apt => 
-            apt.status === 'Completed'
-          );
-
-          // Clear existing content
-          if (appointmentsList) appointmentsList.innerHTML = '';
-          if (recentAppointmentsBody) recentAppointmentsBody.innerHTML = '';
-          if (completedAppointmentsBody) completedAppointmentsBody.innerHTML = '';
-          if (dashboardRecentAppointments) dashboardRecentAppointments.innerHTML = '';
-
-          if (!appointments || appointments.length === 0) {
-            if (appointmentsList) appointmentsList.innerHTML = '<div class="list-group-item">No appointments scheduled</div>';
-            if (recentAppointmentsBody) recentAppointmentsBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No recent appointments</td></tr>';
-            if (completedAppointmentsBody) completedAppointmentsBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No completed appointments</td></tr>';
-            if (dashboardRecentAppointments) dashboardRecentAppointments.innerHTML = '<tr><td colspan="6" style="text-align: center;">No recent appointments</td></tr>';
-            return;
-          }
-
-          // Update appointment count in dashboard
-          const appointmentCount = document.querySelector('[data-stat="appointments"]');
-          if (appointmentCount) {
-            console.log("Setting appointment count to:", upcomingAppointments.length);
-            appointmentCount.textContent = upcomingAppointments.length;
-          }
-
-          // Display upcoming appointments
-          if (appointmentsList) {
-            appointmentsList.innerHTML = upcomingAppointments.map(appointment => {
-              const services = appointment.serviceType.split(', ');
-              const totalPrice = services.reduce((sum, service) => sum + (servicePrices[service] || 0), 0);
-
-              return `
-                <div class="list-group-item">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1">${appointment.serviceType}</h6>
-                    <small>${new Date(appointment.appointmentDate).toLocaleDateString()} at ${appointment.appointmentTime}</small>
-                  </div>
-                  <p class="mb-1">Pet: ${appointment.petName}</p>
-                  <p class="mb-1">${appointment.specialRequests || 'No special requests'}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">Status: ${appointment.status}</small>
-                    <small class="text-muted">Total Price: ₱${totalPrice.toFixed(2)}</small>
-                    <button class="btn btn-sm btn-danger delete-appointment" data-appointment-id="${appointment.id}">
-                      <i class="fas fa-trash"></i> Cancel
-                    </button>
-                  </div>
-                </div>
-              `;
-            }).join('');
-          }
-
-          // Display recent appointments
-          if (recentAppointmentsBody) {
-            recentAppointmentsBody.innerHTML = recentAppointments.map(appointment => {
-              const services = appointment.serviceType.split(', ');
-              const totalPrice = services.reduce((sum, service) => sum + (servicePrices[service] || 0), 0);
-
-              return `
-                <tr>
-                  <td>${new Date(appointment.appointmentDate).toLocaleDateString()}</td>
-                  <td>${appointment.appointmentTime}</td>
-                  <td>${appointment.petName}</td>
-                  <td>${appointment.serviceType}</td>
-                  <td>₱${totalPrice.toFixed(2)}</td>
-                  <td><span class="badge bg-warning">${appointment.status}</span></td>
-                </tr>
-              `;
-            }).join('');
-          }
-
-          // Display completed appointments
-          if (completedAppointmentsBody) {
-            completedAppointmentsBody.innerHTML = completedAppointments.map(appointment => {
-              const services = appointment.serviceType.split(', ');
-              const totalPrice = services.reduce((sum, service) => sum + (servicePrices[service] || 0), 0);
-
-              return `
-                <tr>
-                  <td>${new Date(appointment.appointmentDate).toLocaleDateString()}</td>
-                  <td>${appointment.appointmentTime}</td>
-                  <td>${appointment.petName}</td>
-                  <td>${appointment.serviceType}</td>
-                  <td>₱${totalPrice.toFixed(2)}</td>
-                  <td><span class="badge bg-success">Completed</span></td>
-                </tr>
-              `;
-            }).join('');
-          }
-
-          // Display recent appointments in dashboard
-          if (dashboardRecentAppointments) {
-            dashboardRecentAppointments.innerHTML = recentAppointments.slice(0, 5).map(appointment => {
-              const services = appointment.serviceType.split(', ');
-              const totalPrice = services.reduce((sum, service) => sum + (servicePrices[service] || 0), 0);
-
-              return `
-                <tr>
-                  <td>${new Date(appointment.appointmentDate).toLocaleDateString()}</td>
-                  <td>${appointment.appointmentTime}</td>
-                  <td>${appointment.petName}</td>
-                  <td>${appointment.serviceType}</td>
-                  <td>₱${totalPrice.toFixed(2)}</td>
-                  <td><span class="badge bg-warning">${appointment.status}</span></td>
-                </tr>
-              `;
-            }).join('');
-          }
-
-        } catch (error) {
-          console.error("Error loading appointments:", error);
-          if (appointmentsList) appointmentsList.innerHTML = '<div class="list-group-item text-danger">Error loading appointments. Please try again.</div>';
-          if (recentAppointmentsBody) recentAppointmentsBody.innerHTML = '<tr><td colspan="6" class="text-danger">Error loading recent appointments. Please try again.</td></tr>';
-          if (completedAppointmentsBody) completedAppointmentsBody.innerHTML = '<tr><td colspan="6" class="text-danger">Error loading completed appointments. Please try again.</td></tr>';
-          if (dashboardRecentAppointments) dashboardRecentAppointments.innerHTML = '<tr><td colspan="6" class="text-danger">Error loading recent appointments. Please try again.</td></tr>';
-        }
-      }
-
-      // Load appointments when the page loads
-      document.addEventListener("DOMContentLoaded", async function() {
-        await loadAppointments();
-      });
-
-      // Add event listener for appointments navigation
-      document.querySelector('[data-section="appointments"]').addEventListener('click', async function() {
-        await loadAppointments();
-      });
-
-      // Load user settings when the page loads
-      document.addEventListener("DOMContentLoaded", async function() {
-        console.log("Page loaded, loading user settings...");
-        await loadUserSettings();
       });
 
       // Function to load user settings
@@ -1587,121 +2014,126 @@
       }
 
       // Handle profile form submission
-      document.getElementById("profileForm").addEventListener("submit", async function(e) {
-        e.preventDefault();
-        console.log("Saving profile settings...");
-        
-        const formData = new FormData(this);
-        const settings = {
-          fullName: formData.get("fullName"),
-          email: formData.get("email"),
-          phone: formData.get("phone"),
-          address: formData.get("address"),
-          updated_at: new Date().toISOString()
-        };
+      document
+        .getElementById("profileForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          console.log("Saving profile settings...");
 
-        console.log("Settings to save:", settings);
+          const formData = new FormData(this);
+          const settings = {
+            fullName: formData.get("fullName"),
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            address: formData.get("address"),
+            updated_at: new Date().toISOString(),
+          };
 
-        const supabasePublicClient = supabase.createClient(
-          "https://zehjuqavoktgxjqwcqpo.supabase.co",
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
-          { db: { schema: "public" } }
-        );
+          console.log("Settings to save:", settings);
 
-        try {
-          // Check if user settings exist
-          const { data: existingSettings, error: checkError } = await supabasePublicClient
-            .from("user_settings")
-            .select("id")
-            .single();
+          const supabasePublicClient = supabase.createClient(
+            "https://zehjuqavoktgxjqwcqpo.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+            { db: { schema: "public" } }
+          );
 
-          console.log("Existing settings check:", existingSettings);
+          try {
+            // Check if user settings exist
+            const { data: existingSettings, error: checkError } =
+              await supabasePublicClient
+                .from("user_settings")
+                .select("id")
+                .single();
 
-          if (checkError && checkError.code !== 'PGRST116') {
-            console.error("Error checking existing settings:", checkError);
-            throw checkError;
+            console.log("Existing settings check:", existingSettings);
+
+            if (checkError && checkError.code !== "PGRST116") {
+              console.error("Error checking existing settings:", checkError);
+              throw checkError;
+            }
+
+            let result;
+            if (existingSettings) {
+              console.log("Updating existing settings...");
+              // Update existing settings
+              result = await supabasePublicClient
+                .from("user_settings")
+                .update(settings)
+                .eq("id", existingSettings.id)
+                .select();
+            } else {
+              console.log("Creating new settings...");
+              // Insert new settings
+              result = await supabasePublicClient
+                .from("user_settings")
+                .insert([{ ...settings, user_id: "current_user" }])
+                .select();
+            }
+
+            console.log("Save result:", result);
+
+            if (result.error) {
+              console.error("Error saving settings:", result.error);
+              throw result.error;
+            }
+
+            alert("Profile settings saved successfully!");
+            this.reset(); // Clear the form fields
+            await loadUserProfile(); // Reload profile after save
+          } catch (error) {
+            console.error("Error saving profile settings:", error);
+            alert("Error saving profile settings: " + error.message);
           }
-
-          let result;
-          if (existingSettings) {
-            console.log("Updating existing settings...");
-            // Update existing settings
-            result = await supabasePublicClient
-              .from("user_settings")
-              .update(settings)
-              .eq("id", existingSettings.id)
-              .select();
-          } else {
-            console.log("Creating new settings...");
-            // Insert new settings
-            result = await supabasePublicClient
-              .from("user_settings")
-              .insert([{ ...settings, user_id: "current_user" }])
-              .select();
-          }
-
-          console.log("Save result:", result);
-
-          if (result.error) {
-            console.error("Error saving settings:", result.error);
-            throw result.error;
-          }
-
-          alert("Profile settings saved successfully!");
-          this.reset(); // Clear the form fields
-          await loadUserProfile(); // Reload profile after save
-        } catch (error) {
-          console.error("Error saving profile settings:", error);
-          alert("Error saving profile settings: " + error.message);
-        }
-      });
+        });
 
       // Handle security form submission
-      document.getElementById("securityForm").addEventListener("submit", async function(e) {
-        e.preventDefault();
-        console.log("Updating password...");
-        
-        const formData = new FormData(this);
-        const currentPassword = formData.get("currentPassword");
-        const newPassword = formData.get("newPassword");
-        const confirmPassword = formData.get("confirmPassword");
+      document
+        .getElementById("securityForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          console.log("Updating password...");
 
-        if (newPassword !== confirmPassword) {
-          alert("New passwords do not match!");
-          return;
-        }
+          const formData = new FormData(this);
+          const currentPassword = formData.get("currentPassword");
+          const newPassword = formData.get("newPassword");
+          const confirmPassword = formData.get("confirmPassword");
 
-        const supabasePublicClient = supabase.createClient(
-          "https://zehjuqavoktgxjqwcqpo.supabase.co",
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
-          { db: { schema: "public" } }
-        );
-
-        try {
-          // Update password in user_settings
-          const { data, error } = await supabasePublicClient
-            .from("user_settings")
-            .update({ 
-              password: newPassword,
-              updated_at: new Date().toISOString()
-            })
-            .eq("user_id", "current_user")
-            .select();
-
-          console.log("Password update result:", { data, error });
-
-          if (error) {
-            console.error("Error updating password:", error);
-            throw error;
+          if (newPassword !== confirmPassword) {
+            alert("New passwords do not match!");
+            return;
           }
 
-          alert("Password updated successfully!");
-          this.reset();
-        } catch (error) {
-          console.error("Error updating password:", error);
-          alert("Error updating password: " + error.message);
-        }
-      });
+          const supabasePublicClient = supabase.createClient(
+            "https://zehjuqavoktgxjqwcqpo.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
+            { db: { schema: "public" } }
+          );
+
+          try {
+            // Update password in user_settings
+            const { data, error } = await supabasePublicClient
+              .from("user_settings")
+              .update({
+                password: newPassword,
+                updated_at: new Date().toISOString(),
+              })
+              .eq("user_id", "current_user")
+              .select();
+
+            console.log("Password update result:", { data, error });
+
+            if (error) {
+              console.error("Error updating password:", error);
+              throw error;
+            }
+
+            alert("Password updated successfully!");
+            this.reset();
+          } catch (error) {
+            console.error("Error updating password:", error);
+            alert("Error updating password: " + error.message);
+          }
+        });
 
       // Function to load user profile
       async function loadUserProfile() {
@@ -1728,10 +2160,14 @@
 
           // Update profile information
           if (settings) {
-            document.getElementById("profile-name").textContent = settings.fullName || "Not set";
-            document.getElementById("profile-email").textContent = settings.email || "Not set";
-            document.getElementById("profile-phone").textContent = settings.phone || "Not set";
-            document.getElementById("profile-address").textContent = settings.address || "Not set";
+            document.getElementById("profile-name").textContent =
+              settings.fullName || "Not set";
+            document.getElementById("profile-email").textContent =
+              settings.email || "Not set";
+            document.getElementById("profile-phone").textContent =
+              settings.phone || "Not set";
+            document.getElementById("profile-address").textContent =
+              settings.address || "Not set";
           }
         } catch (error) {
           console.error("Error loading profile:", error);
@@ -1739,19 +2175,23 @@
       }
 
       // Load profile when the page loads
-      document.addEventListener("DOMContentLoaded", async function() {
+      document.addEventListener("DOMContentLoaded", async function () {
         await loadUserProfile();
       });
 
       // Add event listener for profile navigation
-      document.querySelector('[data-section="profile"]').addEventListener('click', async function() {
-        await loadUserProfile();
-      });
+      document
+        .querySelector('[data-section="profile"]')
+        .addEventListener("click", async function () {
+          await loadUserProfile();
+        });
 
       // Add event listener for settings navigation
-      document.querySelector('[data-section="settings"]').addEventListener('click', async function() {
-        await loadUserSettings(); // This will now clear the form
-      });
+      document
+        .querySelector('[data-section="settings"]')
+        .addEventListener("click", async function () {
+          await loadUserSettings(); // This will now clear the form
+        });
 
       // Function to update dashboard stats
       async function updateDashboardStats() {
@@ -1768,47 +2208,93 @@
             .from("user_settings")
             .select("fullName")
             .single();
-          
+
           if (userSettings) {
-            document.getElementById("dashboard-name").textContent = userSettings.fullName;
+            document.getElementById("dashboard-name").textContent =
+              userSettings.fullName;
           }
 
           // Get pets count
           const { count: petsCount } = await supabasePublicClient
             .from("profile-pets")
             .select("*", { count: "exact" });
-          
-          document.querySelector('[data-stat="pets"]').textContent = petsCount || 0;
 
-          // Get appointments
+          document.querySelector('[data-stat="pets"]').textContent =
+            petsCount || 0;
+
+          // Get appointments from newAppointments table
           const { data: appointments } = await supabasePublicClient
-            .from("appointments")
+            .from("newAppointments")
             .select("*")
             .order("appointmentDate", { ascending: true });
 
           if (appointments) {
-            // Update appointments count
-            document.querySelector('[data-stat="appointments"]').textContent = appointments.length;
-            
-            // Update next appointment
-            const nextAppointment = appointments.find(apt => new Date(apt.appointmentDate) >= new Date());
-            if (nextAppointment) {
-              document.querySelector('[data-stat="appointments"]').nextElementSibling.innerHTML = 
-                `<small class="text-muted">Next: ${nextAppointment.appointmentDate}</small>`;
+            // Filter upcoming appointments that are not cancelled or completed
+            const today = new Date();
+            const upcomingAppointments = appointments.filter((apt) => {
+              const isUpcoming = new Date(apt.appointmentDate) >= today;
+              const isNotCancelled = apt.status !== "Cancelled";
+              const isNotCompleted = apt.status !== "Completed";
+              return isUpcoming && isNotCancelled && isNotCompleted;
+            });
+
+            // Update upcoming appointments count
+            const appointmentCountElement = document.querySelector(
+              '[data-stat="appointments"]'
+            );
+            if (appointmentCountElement) {
+              appointmentCountElement.textContent = upcomingAppointments.length;
             }
 
-            // Update total visits
-            const completedVisits = appointments.filter(apt => apt.status === "Completed").length;
-            document.querySelector('[data-stat="visits"]').textContent = completedVisits;
+            // Update next appointment
+            if (upcomingAppointments.length > 0) {
+              // Sort by date (closest first)
+              upcomingAppointments.sort(
+                (a, b) =>
+                  new Date(a.appointmentDate) - new Date(b.appointmentDate)
+              );
+
+              const nextAppointment = upcomingAppointments[0];
+              const nextAppointmentInfo =
+                appointmentCountElement?.nextElementSibling;
+
+              if (nextAppointmentInfo) {
+                const formattedDate = new Date(
+                  nextAppointment.appointmentDate
+                ).toLocaleDateString();
+                nextAppointmentInfo.innerHTML = `<small class="text-muted">Next: ${formattedDate} at ${nextAppointment.appointmentTime}</small>`;
+              }
+            }
+
+            // Update total visits (completed appointments)
+            const completedVisits = appointments.filter(
+              (apt) => apt.status === "Completed"
+            ).length;
+            const visitsElement = document.querySelector(
+              '[data-stat="visits"]'
+            );
+            if (visitsElement) {
+              visitsElement.textContent = completedVisits;
+            }
 
             // Update last visit
-            const lastVisit = appointments
-              .filter(apt => apt.status === "Completed")
-              .sort((a, b) => new Date(b.appointmentDate) - new Date(a.appointmentDate))[0];
-            
-            if (lastVisit) {
-              document.querySelector('[data-stat="last-visit"]').textContent = 
-                new Date(lastVisit.appointmentDate).toLocaleDateString();
+            const completedAppointments = appointments.filter(
+              (apt) => apt.status === "Completed"
+            );
+            if (completedAppointments.length > 0) {
+              const lastVisit = completedAppointments.sort(
+                (a, b) =>
+                  new Date(b.appointmentDate) - new Date(a.appointmentDate)
+              )[0];
+
+              const lastVisitElement = document.querySelector(
+                '[data-stat="last-visit"]'
+              );
+              if (lastVisit && lastVisitElement) {
+                lastVisitElement.textContent = new Date(
+                  lastVisit.appointmentDate
+                ).toLocaleDateString();
+              }
             }
           }
         } catch (error) {
@@ -1817,129 +2303,80 @@
       }
 
       // Update dashboard when it's loaded
-      document.querySelector('[data-section="dashboard"]').addEventListener('click', async function() {
-        await updateDashboardStats();
-      });
+      document
+        .querySelector('[data-section="dashboard"]')
+        .addEventListener("click", async function () {
+          await updateDashboardStats();
+        });
 
       // Update dashboard when page loads
-      document.addEventListener("DOMContentLoaded", async function() {
+      document.addEventListener("DOMContentLoaded", async function () {
         await updateDashboardStats();
       });
 
       // Add event listeners for Quick Action buttons
-      document.getElementById('viewAppointmentsBtn').addEventListener('click', function() {
-        // Hide all sections
-        document.querySelectorAll('.section-content').forEach(section => {
-          section.style.display = 'none';
-        });
-        
-        // Show appointments section
-        document.getElementById('appointments-section').style.display = 'block';
-        
-        // Update navigation active state
-        document.querySelectorAll('.nav-link').forEach(link => {
-          link.classList.remove('active');
-        });
-        document.querySelector('[data-section="appointments"]').classList.add('active');
-        
-        // Load appointments
-        loadAppointments();
-      });
+      document
+        .getElementById("viewAppointmentsBtn")
+        .addEventListener("click", function () {
+          // Hide all sections
+          document.querySelectorAll(".section-content").forEach((section) => {
+            section.style.display = "none";
+          });
 
-      document.getElementById('updateProfileBtn').addEventListener('click', function() {
-        // Hide all sections
-        document.querySelectorAll('.section-content').forEach(section => {
-          section.style.display = 'none';
+          // Show appointments section
+          document.getElementById("appointments-section").style.display =
+            "block";
+
+          // Update navigation active state
+          document.querySelectorAll(".nav-link").forEach((link) => {
+            link.classList.remove("active");
+          });
+          document
+            .querySelector('[data-section="appointments"]')
+            .classList.add("active");
+
+          // Load appointments
+          loadAppointments();
         });
-        
-        // Show settings section
-        document.getElementById('settings-section').style.display = 'block';
-        
-        // Update navigation active state
-        document.querySelectorAll('.nav-link').forEach(link => {
-          link.classList.remove('active');
+
+      document
+        .getElementById("updateProfileBtn")
+        .addEventListener("click", function () {
+          // Hide all sections
+          document.querySelectorAll(".section-content").forEach((section) => {
+            section.style.display = "none";
+          });
+
+          // Show settings section
+          document.getElementById("settings-section").style.display = "block";
+
+          // Update navigation active state
+          document.querySelectorAll(".nav-link").forEach((link) => {
+            link.classList.remove("active");
+          });
+          document
+            .querySelector('[data-section="settings"]')
+            .classList.add("active");
+
+          // Load settings form
+          loadUserSettings();
         });
-        document.querySelector('[data-section="settings"]').classList.add('active');
-        
-        // Load settings form
-        loadUserSettings();
-      });
 
       // Add this to your existing script section
-      document.addEventListener('DOMContentLoaded', function() {
-        const bookAppointmentBtn = document.getElementById('bookAppointmentBtn');
+      document.addEventListener("DOMContentLoaded", function () {
+        const bookAppointmentBtn =
+          document.getElementById("bookAppointmentBtn");
         if (bookAppointmentBtn) {
-          bookAppointmentBtn.addEventListener('click', function(e) {
+          bookAppointmentBtn.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
             // Open the schedule appointment modal
-            const scheduleModal = new bootstrap.Modal(document.getElementById('scheduleAppointmentModal'));
+            const scheduleModal = new bootstrap.Modal(
+              document.getElementById("scheduleAppointmentModal")
+            );
             scheduleModal.show();
           });
         }
-      });
-
-      // Add event listener for cancel buttons
-      document.addEventListener('click', async function(e) {
-        if (e.target.closest('.delete-appointment')) {
-          const button = e.target.closest('.delete-appointment');
-          const appointmentId = button.dataset.appointmentId;
-          
-          if (confirm('Are you sure you want to cancel this appointment?')) {
-            try {
-              const supabasePublicClient = supabase.createClient(
-                "https://zehjuqavoktgxjqwcqpo.supabase.co",
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
-                { db: { schema: "public" } }
-              );
-
-              console.log('Attempting to update appointment status:', appointmentId);
-              
-              const { data, error } = await supabasePublicClient
-                .from('appointments')
-                .update({ status: 'Cancelled' })
-                .eq('id', appointmentId)
-                .select();
-
-              if (error) {
-                console.error('Supabase error:', error);
-                throw error;
-              }
-
-              console.log('Update response:', data);
-
-              // Reload appointments to update the view
-              await loadAppointments();
-              alert('Appointment cancelled successfully!');
-            } catch (error) {
-              console.error('Error cancelling appointment:', error);
-              alert('Error cancelling appointment: ' + (error.message || 'Unknown error'));
-            }
-          }
-        }
-      });
-
-      // Handle navigation
-      document.querySelectorAll('.nav-link').forEach(link => {
-          link.addEventListener('click', function(e) {
-              e.preventDefault();
-              const section = this.getAttribute('data-section');
-              
-              // Hide all sections
-              document.querySelectorAll('.section-content').forEach(content => {
-                  content.style.display = 'none';
-              });
-              
-              // Show selected section
-              const targetSection = document.getElementById(`${section}-section`);
-              if (targetSection) {
-                  targetSection.style.display = 'block';
-              }
-              
-              // Update active link
-              document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-              this.classList.add('active');
-          });
       });
 
       // Add this after the loadPets function
@@ -1952,7 +2389,9 @@
 
           if (error) throw error;
 
-          const deletedPetsContainer = document.getElementById("deleted-pets-container");
+          const deletedPetsContainer = document.getElementById(
+            "deleted-pets-container"
+          );
           if (!deletedPetsContainer) return;
 
           if (pets.length === 0) {
@@ -1960,7 +2399,9 @@
             return;
           }
 
-          deletedPetsContainer.innerHTML = pets.map(pet => `
+          deletedPetsContainer.innerHTML = pets
+            .map(
+              (pet) => `
             <div class="col-md-4 mb-4">
               <div class="card">
                 <div class="card-body">
@@ -1973,59 +2414,63 @@
                 </div>
               </div>
             </div>
-          `).join('');
+          `
+            )
+            .join("");
 
           // Add event listeners for recover buttons
-          document.querySelectorAll('.recover-pet').forEach(button => {
-            button.addEventListener('click', async function() {
-              const petId = this.getAttribute('data-pet-id');
+          document.querySelectorAll(".recover-pet").forEach((button) => {
+            button.addEventListener("click", async function () {
+              const petId = this.getAttribute("data-pet-id");
               try {
                 const { error } = await supabasePublicClient
                   .from("profile-pets")
-                  .update({ status: 'Active' })
+                  .update({ status: "Active" })
                   .eq("id", petId);
 
                 if (error) throw error;
 
-                alert('Pet recovered successfully!');
+                alert("Pet recovered successfully!");
                 loadPets(); // Reload the pets list
                 loadDeletedPets(); // Reload the deleted pets list
               } catch (err) {
-                console.error('Error recovering pet:', err);
-                alert('Error recovering pet. Please try again.');
+                console.error("Error recovering pet:", err);
+                alert("Error recovering pet. Please try again.");
               }
             });
           });
         } catch (err) {
-          console.error('Error loading deleted pets:', err);
-          alert('Error loading deleted pets. Please try again.');
+          console.error("Error loading deleted pets:", err);
+          alert("Error loading deleted pets. Please try again.");
         }
       }
 
       // Add this to your navigation event listener
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
+      document.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", function (e) {
           e.preventDefault();
-          const section = this.getAttribute('data-section');
-          
+          const section = this.getAttribute("data-section");
+
           // Hide all sections
-          document.querySelectorAll('.section-content').forEach(content => {
-            content.style.display = 'none';
+          document.querySelectorAll(".section-content").forEach((content) => {
+            content.style.display = "none";
           });
-          
+
           // Show selected section
           const targetSection = document.getElementById(`${section}-section`);
           if (targetSection) {
-            targetSection.style.display = 'block';
-            if (section === 'pets') {
+            targetSection.style.display = "block";
+            if (section === "pets") {
               loadPets();
               loadDeletedPets();
             }
           }
-          
+
           // Update active link
-          document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-          this.classList.add('active');
+          document
+            .querySelectorAll(".nav-link")
+            .forEach((l) => l.classList.remove("active"));
+          this.classList.add("active");
         });
       });
 
@@ -2041,7 +2486,7 @@
         const supabasePublicClient = supabase.createClient(
           "https://zehjuqavoktgxjqwcqpo.supabase.co",
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGp1cWF2b2t0Z3hqcXdjcXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyMDA2ODAsImV4cCI6MjA2MTc3NjY4MH0.n2Nb0QgaZFVW4zC0NyQGAy38tka_gwkhiTrBC8rU-GM",
-            { db: { schema: "public" } }
+          { db: { schema: "public" } }
         );
 
         try {
@@ -2050,7 +2495,7 @@
             .update({
               petName: editPetName.value,
               petSpecies: editPetSpecies.value,
-              petBreed: editPetBreed.value
+              petBreed: editPetBreed.value,
             })
             .eq("id", petId)
             .select();
@@ -2071,9 +2516,7 @@
           }
         } catch (err) {
           console.error("Error updating pet:", err);
-          alert(
-            "An error occurred while updating the pet information."
-          );
+          alert("An error occurred while updating the pet information.");
         }
       };
     </script>
